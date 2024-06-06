@@ -65,6 +65,8 @@ book:
       chapters:
       - chapters/rstudio/rstudio.qmd
       - chapters/regex/regex.qmd
+      - chapters/programming_with_functions/programming_with_functions.qmd
+      - chapters/packages_quick_start/packages_quick_start.qmd
       
     - part: "Data Simulation"
       # chapters: 

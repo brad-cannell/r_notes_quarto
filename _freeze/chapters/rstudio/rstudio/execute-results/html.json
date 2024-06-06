@@ -1,0 +1,12 @@
+{
+  "hash": "b791a8c91598fe1c2348948ba142f82f",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "# RStudio {#sec-regex}\n\nA collection of notes about programming in RStudio -- including notes about modifying RStudio locally.\n\n## Find and Replace Tool\n\nNotes on using RStudio's Find and Replace tool. This can be a real time saver!\n\n### Regular Expressions\n\nThese notes should be specifically about using Regular Expressions _in RStudio's Find and Replace tool_. See @sec-regex for notes about regular expressions in general.\n\n#### Substituions\n\nI was working on making updates to Intro to R. While converting Rmd documents to Qmd documents, I was looking for a way to use the find and replace tool to convert the code chunk options from their knitr style (i.e., `{eval=FALSE}`) to the Quarto style (i.e., `#| eval: false`). Using this [SO post](https://stackoverflow.com/questions/30896845/r-regex-to-find-and-replace-code-in-rstudio), I did some experimenting in [regex101](https://regex101.com/r/21wSPU/1) and found a solution. Here it is:\n\n\n\n\n```{markdown}\n# Find code (with leading space):\n eval=FALSE}\n```\n\n\n\n# Replace code:\n}\\n#| eval: false\\n\n````\n\nIt turns out that the substitution part is pretty straightforward in this case, but I think that stack overflow post will be useful for more complicated cases when I have to use capture groups as well.\n\n",
+    "supporting": [
+      "rstudio_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "hash": "8b90efd442329472b528701e12bd055a",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Programming with functions {#sec-programming-with-functions}\n\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](https://picsum.photos/200/300)\n:::\n:::\n\n\n\n\n## ⭐️ Overview\n\nThe basic question I asked while developing `tabler` was how do you pass a function as an argument to another function. \n\nThis chapter still needs a lot of work.\n\n## 🌎 Useful websites\n\n* [Advanced R: Functionals](http://adv-r.had.co.nz/Functionals.html)\n\n## 📦 Load packages\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(dplyr, warn.conflicts = FALSE)\n```\n:::\n\n\n\n\n## 🔢 Simulate data \n\nHere we simulate a small data set that is intended to be representative of data from a research study.\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nset.seed(123)\nstudy <- tibble(\n  id     = as.character(seq(1001, 1020, 1)),\n  sex    = factor(sample(c(\"Female\", \"Male\"), 20, TRUE)),\n  date   = sample(seq.Date(as.Date(\"2021-09-15\"), as.Date(\"2021-10-26\"), \"day\"), 20, TRUE),\n  days   = sample(1L:21L, 20L, TRUE),\n  height = rnorm(20, 71, 10)\n)\n\n# Add missing values for testing\nstudy$id[3] <- NA\nstudy$sex[4] <- NA\nstudy$date[5] <- NA\nstudy$days[6] <- NA\nstudy$height[7] <- NA\n```\n:::\n\n\n\n\n## Examples\n\nThis needs to be cleaned up. I'm just in a rush.\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# Function passed to a function?\nfn_number <- function(x) {\n  x\n}\n\nfn_number(3)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 3\n```\n\n\n:::\n\n```{.r .cell-code}\nfn_sum <- function(n, fn) {\n  1 + fn(n)\n}\n\nfn_sum(3, fn_number)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 4\n```\n\n\n:::\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\nlapply2 <- function(x, f, ...) {\n  out <- vector(\"list\", length(x))\n  for (i in seq_along(x)) {\n    out[[i]] <- f(x[[i]], ...)\n  }\n  out\n}\n\nlapply2(select(study, days, height), mean)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[[1]]\n[1] NA\n\n[[2]]\n[1] NA\n```\n\n\n:::\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\nlapply2(select(study, days, height), mean, na.rm = TRUE)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[[1]]\n[1] 12.05263\n\n[[2]]\n[1] 72.33294\n```\n\n\n:::\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\n# How do I make this work like purrr, dplyr, etc.\nlapply2(select(study, days, height), ~ mean(.x, na.rm = TRUE))\n```\n\n::: {.cell-output .cell-output-error}\n\n```\nError in f(x[[i]], ...): could not find function \"f\"\n```\n\n\n:::\n:::\n\n\n\n\n\n<!--\nClean up and add session info\n-->\n\n\n\n\n::: {.cell}\n\n:::\n",
+    "supporting": [
+      "programming_with_functions_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

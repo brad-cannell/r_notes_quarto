@@ -1,0 +1,98 @@
+# Programming with functions {#sec-programming-with-functions}
+
+```{r}
+#| echo: false
+
+knitr::include_graphics("https://picsum.photos/200/300")
+```
+
+## ⭐️ Overview
+
+The basic question I asked while developing `tabler` was how do you pass a function as an argument to another function. 
+
+This chapter still needs a lot of work.
+
+## 🌎 Useful websites
+
+* [Advanced R: Functionals](http://adv-r.had.co.nz/Functionals.html)
+
+## 📦 Load packages
+
+```{r}
+library(dplyr, warn.conflicts = FALSE)
+```
+
+## 🔢 Simulate data 
+
+Here we simulate a small data set that is intended to be representative of data from a research study.
+
+```{r}
+set.seed(123)
+study <- tibble(
+  id     = as.character(seq(1001, 1020, 1)),
+  sex    = factor(sample(c("Female", "Male"), 20, TRUE)),
+  date   = sample(seq.Date(as.Date("2021-09-15"), as.Date("2021-10-26"), "day"), 20, TRUE),
+  days   = sample(1L:21L, 20L, TRUE),
+  height = rnorm(20, 71, 10)
+)
+
+# Add missing values for testing
+study$id[3] <- NA
+study$sex[4] <- NA
+study$date[5] <- NA
+study$days[6] <- NA
+study$height[7] <- NA
+```
+
+## Examples
+
+This needs to be cleaned up. I'm just in a rush.
+
+```{r}
+# Function passed to a function?
+fn_number <- function(x) {
+  x
+}
+
+fn_number(3)
+
+fn_sum <- function(n, fn) {
+  1 + fn(n)
+}
+
+fn_sum(3, fn_number)
+```
+
+```{r}
+lapply2 <- function(x, f, ...) {
+  out <- vector("list", length(x))
+  for (i in seq_along(x)) {
+    out[[i]] <- f(x[[i]], ...)
+  }
+  out
+}
+
+lapply2(select(study, days, height), mean)
+```
+
+```{r}
+lapply2(select(study, days, height), mean, na.rm = TRUE)
+```
+
+```{r error=TRUE}
+# How do I make this work like purrr, dplyr, etc.
+lapply2(select(study, days, height), ~ mean(.x, na.rm = TRUE))
+```
+
+
+<!--
+Clean up and add session info
+-->
+
+```{r}
+#| echo: false
+
+rm(list = ls())
+```
+
+
