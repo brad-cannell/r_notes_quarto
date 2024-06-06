@@ -1,0 +1,22 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "R Notes",
+    "section": "",
+    "text": "Introduction\nWelcome to Brad Cannell’s R Notes!\nThis repository is for a Quarto version Brad Cannell’s R Notes. This repository is primarily intended to be helpful to me, but even better if you find it useful too! This version of my R Notes replaces the previous Bookdown version.\nWhy am I doing this (as opposed to just keeping notes locally)?",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "index.html#organization",
+    "href": "index.html#organization",
+    "title": "R Notes",
+    "section": "Organization",
+    "text": "Organization\nThese notes are loosely organized into the following parts:\n\nProgramming: Notes about optimizing code, writing functions, creating packages, and repeated operations.\nData Simulation: Notes about simulating data.\nWorking with external files: Notes about things like data transfer, web scraping, PDF scraping, and using Officer to scrape Microsoft Office documents.\nData management: Notes about manipulating/transforming/filtering data that is already in R.\nAnalysis: Notes about creating numerical summaries of data.\nData visualization: Notes about graphical summaries of data. A lot of this will be about ggplot.\nPresenting results: Notes about making numerical and graphical summaries accessible outside of R. This can include webpages, static dashboards, PDF documents, Microsoft Office documents, etc. This does not include Shiny apps.\nCollaboration: Notes about collaborative coding. This is primarily notes on using Git and GitHub.\nShiny: I am no longer keeping notes about Shiny here. Shiny has it’s own notebook. https://brad-cannell.github.io/shiny_notes_quarto/\n\nThis work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.",
+    "crumbs": [
+      "Introduction"
+    ]
+  }
+]
