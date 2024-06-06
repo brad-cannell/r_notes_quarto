@@ -1,0 +1,95 @@
+project:
+  type: book
+  output-dir: _book
+
+# Book formatting types and options
+format:
+  html:
+    theme: 
+      - cosmo
+      - test_quarto_book_styles.scss
+    # mainfont: Roboto # For testing (https://ucsb-meds.github.io/customizing-quarto-websites/#/select-fonts)
+  # pdf:
+  #   documentclass: scrreprt
+    
+# Add this in order to use webR
+filters:
+  - webr
+
+# Bibliography and citation options
+bibliography: references.bib
+csl: ama.csl
+
+# Set editor to default to source view instead of visual view
+editor: source
+
+# To make sure that R, Python, and Julia code is only executed locally, 
+# configure your project to use Quarto’s freeze feature by adding this to your 
+# _quarto.yml. (https://quarto.org/docs/publishing/netlify.html)
+execute:
+  freeze: auto
+
+# Book structure and options
+book:
+  # Basic metadata
+  title: "R Notes"
+  author: "Brad Cannell"
+  date: today # Figure out how to automatically update the date on render.
+  favicon: cover.png
+  repo-url: https://github.com/brad-cannell/test_quarto_book
+  repo-actions: [edit]
+  page-footer: 
+    left: |
+      R for Epidemiology
+    right: |
+      This book was built with <a href="https://quarto.org/">Quarto</a>.
+  
+  # Book options
+  search: true
+  # downloads: [pdf, docx] # https://quarto.org/docs/books/book-output.html#sidebar-tools
+  # sharing: [twitter, facebook]
+  page-navigation: true # Haven't played with this much yet. https://quarto.org/docs/books/book-structure.html#page-navigation
+
+  # Chapter sturcture
+  # https://quarto.org/docs/books/book-structure.html
+  chapters:
+    # Index is the landing page for the HTML version of the book.
+    - index.qmd
+    
+    # My chapters
+    # Parts can be qmd files (if you want explanitory text) or characater strings
+    # if you only want a part title.
+    # The qmd file method does not look good in pdf format.
+    - part: "Programming"
+      # Make sure to type "chapters" again under each part.
+      # chapters: 
+      # - chapters/book_options.qmd
+      
+    - part: "Data Simulation"
+      # chapters: 
+      #   - chapters/call_out_boxes.qmd
+        
+    - part: "Working with External Files"
+      # chapters: 
+      #   - chapters/code_chunks.qmd
+        
+    - part: "Data Management"
+      # chapters: 
+      #   - chapters/pdf.qmd
+      
+    - part: "Analysis"
+      # chapters: 
+      #   - chapters/pdf.qmd
+      
+    - part: "Data Visualization"
+      # chapters: 
+      #   - chapters/pdf.qmd
+      
+    - part: "Presenting Results"
+      # chapters: 
+      #   - chapters/pdf.qmd
+      
+    - part: "Collaborating"
+      # chapters: 
+      #   - chapters/pdf.qmd
+

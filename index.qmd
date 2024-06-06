@@ -1,0 +1,39 @@
+# Introduction {.unnumbered}
+
+Welcome to Brad Cannell's R Notes!
+
+This repository is for a [Quarto](https://quarto.org/) version Brad Cannell's R Notes. This repository is primarily intended to be helpful to me, but even better if you find it useful too! This version of my R Notes replaces the previous [Bookdown version](https://brad-cannell.github.io/r_notes/). 
+
+Why am I doing this (as opposed to just keeping notes locally)?       
+
+- Better organized (e.g., chapter structure and search).      
+
+- Easy access -- just click on the bookmark on web browser.      
+
+- Practice using Quarto.      
+
+- Might help with R4Epi -- This can be sort of a sandbox for developing before I add things to R4Epi.   
+
+## Organization {-}
+
+These notes are loosely organized into the following parts:   
+
+- **Programming:** Notes about optimizing code, writing functions, creating packages, and repeated operations.   
+
+- **Data Simulation:** Notes about simulating data.
+
+- **Working with external files:** Notes about things like data transfer, web scraping, PDF scraping, and using Officer to scrape Microsoft Office documents.   
+
+- **Data management:** Notes about manipulating/transforming/filtering data that is already in R.   
+
+- **Analysis:** Notes about creating numerical summaries of data.
+
+- **Data visualization:** Notes about graphical summaries of data. A lot of this will be about ggplot. 
+
+- **Presenting results:**  Notes about making numerical and graphical summaries accessible outside of R. This can include webpages, static dashboards, PDF documents, Microsoft Office documents, etc. This does not include Shiny apps.  
+
+- **Collaboration:**  Notes about collaborative coding. This is primarily notes on using Git and GitHub.  
+
+- **Shiny:** I am no longer keeping notes about Shiny here. Shiny has it's own notebook. https://brad-cannell.github.io/shiny_notes_quarto/
+
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
