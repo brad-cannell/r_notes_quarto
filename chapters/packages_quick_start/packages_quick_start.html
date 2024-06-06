@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>R Notes – 4&nbsp; Packages: Quick Start</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../chapters/programming_with_functions/programming_with_functions.html" rel="prev">
+<link href="../../cover.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/rstudio/rstudio.html">Programming</a></li><li class="breadcrumb-item"><a href="../../chapters/packages_quick_start/packages_quick_start.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Packages: Quick Start</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">R Notes</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/brad-cannell/test_quarto_book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Programming</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/rstudio/rstudio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">RStudio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/regex/regex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Regular Expressions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/programming_with_functions/programming_with_functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programming with functions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/packages_quick_start/packages_quick_start.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Packages: Quick Start</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Data Simulation</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Working with External Files</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Data Management</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Analysis</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Data Visualization</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Presenting Results</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Collaborating</span></span>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">4.1</span> ⭐️ Overview</a></li>
+  <li><a href="#useful-websites" id="toc-useful-websites" class="nav-link" data-scroll-target="#useful-websites"><span class="header-section-number">4.2</span> 🌎 Useful websites</a></li>
+  <li><a href="#quick-process" id="toc-quick-process" class="nav-link" data-scroll-target="#quick-process"><span class="header-section-number">4.3</span> Quick Process</a></li>
+  <li><a href="#before-creating-the-package" id="toc-before-creating-the-package" class="nav-link" data-scroll-target="#before-creating-the-package"><span class="header-section-number">4.4</span> Before creating the package</a></li>
+  <li><a href="#create" id="toc-create" class="nav-link" data-scroll-target="#create"><span class="header-section-number">4.5</span> Step 1: Create the package project</a></li>
+  <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes"><span class="header-section-number">4.6</span> Step 2: Add a NOTES file</a></li>
+  <li><a href="#license" id="toc-license" class="nav-link" data-scroll-target="#license"><span class="header-section-number">4.7</span> Step 3: Add license</a></li>
+  <li><a href="#modify" id="toc-modify" class="nav-link" data-scroll-target="#modify"><span class="header-section-number">4.8</span> Step 4: Modify the description file</a></li>
+  <li><a href="#readme" id="toc-readme" class="nav-link" data-scroll-target="#readme"><span class="header-section-number">4.9</span> Step 5: Add README</a></li>
+  <li><a href="#git" id="toc-git" class="nav-link" data-scroll-target="#git"><span class="header-section-number">4.10</span> Step 6: Add Git</a></li>
+  <li><a href="#github" id="toc-github" class="nav-link" data-scroll-target="#github"><span class="header-section-number">4.11</span> Step 7: Connect to GitHub</a>
+  <ul class="collapse">
+  <li><a href="#setting-up-github" id="toc-setting-up-github" class="nav-link" data-scroll-target="#setting-up-github"><span class="header-section-number">4.11.1</span> Setting up GitHub</a></li>
+  </ul></li>
+  <li><a href="#package-functions" id="toc-package-functions" class="nav-link" data-scroll-target="#package-functions"><span class="header-section-number">4.12</span> Step 8: Adding content to the package</a>
+  <ul class="collapse">
+  <li><a href="#working-with-r-scripts" id="toc-working-with-r-scripts" class="nav-link" data-scroll-target="#working-with-r-scripts"><span class="header-section-number">4.12.1</span> Working with R scripts</a></li>
+  <li><a href="#adding-help-pages-to-functions" id="toc-adding-help-pages-to-functions" class="nav-link" data-scroll-target="#adding-help-pages-to-functions"><span class="header-section-number">4.12.2</span> Adding help pages to functions</a></li>
+  <li><a href="#example-roxygen-header" id="toc-example-roxygen-header" class="nav-link" data-scroll-target="#example-roxygen-header"><span class="header-section-number">4.12.3</span> Example <code>roxygen</code> header</a></li>
+  <li><a href="#dont-run-the-examples" id="toc-dont-run-the-examples" class="nav-link" data-scroll-target="#dont-run-the-examples"><span class="header-section-number">4.12.4</span> Don’t run the examples</a></li>
+  <li><a href="#keyboard-shortcut-for-inserting-roxygen-comment" id="toc-keyboard-shortcut-for-inserting-roxygen-comment" class="nav-link" data-scroll-target="#keyboard-shortcut-for-inserting-roxygen-comment"><span class="header-section-number">4.12.5</span> Keyboard shortcut for inserting roxygen #’ comment</a></li>
+  <li><a href="#simulating-data" id="toc-simulating-data" class="nav-link" data-scroll-target="#simulating-data"><span class="header-section-number">4.12.6</span> Simulating data</a></li>
+  <li><a href="#documenting-data" id="toc-documenting-data" class="nav-link" data-scroll-target="#documenting-data"><span class="header-section-number">4.12.7</span> Documenting data</a></li>
+  <li><a href="#documenting-package" id="toc-documenting-package" class="nav-link" data-scroll-target="#documenting-package"><span class="header-section-number">4.12.8</span> Documenting Package</a></li>
+  </ul></li>
+  <li><a href="#testing" id="toc-testing" class="nav-link" data-scroll-target="#testing"><span class="header-section-number">4.13</span> Step 9: Creating unit tests</a></li>
+  <li><a href="#vignettes" id="toc-vignettes" class="nav-link" data-scroll-target="#vignettes"><span class="header-section-number">4.14</span> Step 10: Vignettes</a>
+  <ul class="collapse">
+  <li><a href="#to-create-a-vignette" id="toc-to-create-a-vignette" class="nav-link" data-scroll-target="#to-create-a-vignette"><span class="header-section-number">4.14.1</span> To create a vignette:</a></li>
+  <li><a href="#vignette-notes" id="toc-vignette-notes" class="nav-link" data-scroll-target="#vignette-notes"><span class="header-section-number">4.14.2</span> Vignette Notes:</a></li>
+  <li><a href="#pkgdown" id="toc-pkgdown" class="nav-link" data-scroll-target="#pkgdown"><span class="header-section-number">4.14.3</span> Pkgdown</a></li>
+  </ul></li>
+  <li><a href="#cran" id="toc-cran" class="nav-link" data-scroll-target="#cran"><span class="header-section-number">4.15</span> Submitting to CRAN</a></li>
+  <li><a href="#package-evolution" id="toc-package-evolution" class="nav-link" data-scroll-target="#package-evolution"><span class="header-section-number">4.16</span> Package evolution</a></li>
+  <li><a href="#other-random-notes" id="toc-other-random-notes" class="nav-link" data-scroll-target="#other-random-notes"><span class="header-section-number">4.17</span> Other random notes</a>
+  <ul class="collapse">
+  <li><a href="#get-rid-of-.ds_store" id="toc-get-rid-of-.ds_store" class="nav-link" data-scroll-target="#get-rid-of-.ds_store"><span class="header-section-number">4.17.1</span> Get rid of .DS_Store</a></li>
+  <li><a href="#file-mode-changes" id="toc-file-mode-changes" class="nav-link" data-scroll-target="#file-mode-changes"><span class="header-section-number">4.17.2</span> File mode changes</a></li>
+  <li><a href="#icon-files" id="toc-icon-files" class="nav-link" data-scroll-target="#icon-files"><span class="header-section-number">4.17.3</span> Icon files</a></li>
+  </ul></li>
+  <li><a href="#errors-warnings-notes" id="toc-errors-warnings-notes" class="nav-link" data-scroll-target="#errors-warnings-notes"><span class="header-section-number">4.18</span> Errors, warnings, notes</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/brad-cannell/test_quarto_book/edit/main/chapters/packages_quick_start/packages_quick_start.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/rstudio/rstudio.html">Programming</a></li><li class="breadcrumb-item"><a href="../../chapters/packages_quick_start/packages_quick_start.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Packages: Quick Start</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-packages-quick-start" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Packages: Quick Start</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">4.1</span> ⭐️ Overview</h2>
+<p>This chapter is my quick start guide for creating packages. I’m going to walk through the process I used to create the <code>codebook</code> package, plus add some extra notes that have been helpful along the way when creating other packages.</p>
+<p>This is not meant to be a comprehensive guide to creating packages. <a href="https://r-pkgs.org/">Hadley Wickham and Jenny Bryan’s R Packages book</a> already exists for that purpose. This is supposed to just be a quick overview and some notes to remember in the future.</p>
+</section>
+<section id="useful-websites" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="useful-websites"><span class="header-section-number">4.2</span> 🌎 Useful websites</h2>
+<ul>
+<li><a href="https://r-pkgs.org/">Hadley Wickham and Jenny Bryan’s R Packages book</a><br>
+</li>
+<li><a href="https://github.com/r-lib/devtools">devtools package</a><br>
+</li>
+<li><a href="https://github.com/r-lib/usethis">usethis package</a></li>
+</ul>
+</section>
+<section id="quick-process" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="quick-process"><span class="header-section-number">4.3</span> Quick Process</h2>
+<ol type="1">
+<li><p><a href="#create">Create new project/package directory</a> with <code>usethis::create_package()</code>. Restart.</p></li>
+<li><p><a href="#notes">Add a NOTES file</a>.</p></li>
+<li><p><a href="#license">Add license</a> with <code>usethis::use_mit_license()</code>.</p></li>
+<li><p><a href="#modify">Modify the description file</a>.</p></li>
+<li><p><a href="#readme">Add README</a> with <code>usethis::use_readme_rmd()</code> and <code>devtools::build_readme()</code>.</p></li>
+<li><p><a href="#git">Add Git</a> with <code>usethis::use_git()</code>. Restart.</p></li>
+<li><p><a href="#github">Connect to GitHub</a> with <code>usethis::use_github()</code>.</p></li>
+<li><p><a href="#package-functions">Add functions to the package</a>.</p></li>
+<li><p><a href="#testing">Creating unit tests</a>.</p></li>
+<li><p><a href="#vignettes">Creating vignettes</a>.</p></li>
+<li><p><a href="#cran">Completing a version of the package and (optionally) submitting to CRAN</a>.</p></li>
+</ol>
+</section>
+<section id="before-creating-the-package" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="before-creating-the-package"><span class="header-section-number">4.4</span> Before creating the package</h2>
+<p>Give the package a new (<a href="http://r-pkgs.had.co.nz/package.html">Hadley’s naming strategies</a>)</p>
+</section>
+<section id="create" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="create"><span class="header-section-number">4.5</span> Step 1: Create the package project</h2>
+<p>Call <code>create_package()</code> to initialize a new package in a directory on your computer (and create the directory, if necessary).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">create_package</span>(<span class="st">"/Users/bradcannell/Dropbox/R/Packages/codebook"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The function will do all of this:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="create_package.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="notes" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="notes"><span class="header-section-number">4.6</span> Step 2: Add a NOTES file</h2>
+<p>The <a href="https://r-pkgs.org/">R Packages book</a> doesn’t mention creating a <code>NOTES</code> file, but it’s something I like to do. I use the notes file to help me remember little things related to the development of the package that aren’t meant to be shared publicly.</p>
+<ol type="1">
+<li>Create a new text file, add the following template to the top of the file, and fill it out appropriately.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># =============================================================================</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># codebook notes</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># =============================================================================</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>Use NOTES <span class="cf">for</span> notes, but not tasks. Why or how, but not what.</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>Submission Notes<span class="sc">:</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="sc">-----------------</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="er">*</span> Useful website<span class="sc">:</span> http<span class="sc">:</span><span class="er">//</span>r<span class="sc">-</span>pkgs.had.co.nz<span class="sc">/</span>release.html</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Update README before submission. It should roughly match the examples <span class="cf">in</span> the roxygen documentation.</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span> Update README.Rmd, not README.md.</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span> Knit README.Rmd after making changes. This will automatically update README.md</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Update vignettes using devtools<span class="sc">::</span><span class="fu">document</span>()</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Update news.md. Here<span class="st">'s dplyr'</span><span class="fu">s</span> (https<span class="sc">:</span><span class="er">//</span>raw.githubusercontent.com<span class="sc">/</span>tidyverse<span class="sc">/</span>dplyr<span class="sc">/</span>master<span class="sc">/</span>NEWS.md)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> If you were on a development branch, merge with main branch.</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Use devtools<span class="sc">::</span><span class="fu">check</span>()</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Use devtools<span class="sc">::</span><span class="fu">check_win_devel</span>() to test the package on Windows</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Update cran<span class="sc">-</span>comments.</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span> If this is a resubmission, add a bulleted list of changes made under <span class="do">## Resubmission.</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Submit with devtools<span class="sc">::</span><span class="fu">release</span>()</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> After the package is accepted, do this stuff<span class="sc">:</span> http<span class="sc">:</span><span class="er">//</span>r<span class="sc">-</span>pkgs.had.co.nz<span class="sc">/</span>release.html<span class="co">#post-release</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li><p>Save as <code>NOTES</code></p></li>
+<li><p>Add to gitignore.</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_git_ignore</span>(<span class="st">"NOTES"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="4" type="1">
+<li>Add to buildignore.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_build_ignore</span>(<span class="st">"NOTES"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="license" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="license"><span class="header-section-number">4.7</span> Step 3: Add license</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_mit_license</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The function will do all of this:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="use_mit_license.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>You will still need to open the new <code>LICENSE</code> file and change <code>COPYRIGHT HOLDER:</code> to “Brad Cannell”. You can also look in the templates folder for more elaborate licenses.</p>
+</section>
+<section id="modify" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="modify"><span class="header-section-number">4.8</span> Step 4: Modify the description file</h2>
+<p>Open the description file and make some changes.</p>
+<p>Here is a minimal example from <code>codebook</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Package<span class="sc">:</span> codebook</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>Title<span class="sc">:</span> Create Codebooks From Data Frames</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>Version<span class="sc">:</span> <span class="dv">0</span>.<span class="dv">0</span>.<span class="fl">0.9000</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>Authors<span class="sc">@</span>R<span class="sc">:</span> <span class="fu">person</span>(<span class="st">"Brad"</span>, <span class="st">"Cannell"</span>, <span class="at">email =</span> <span class="st">"brad.cannell@gmail.com"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">role =</span> <span class="fu">c</span>(<span class="st">"aut"</span>, <span class="st">"cre"</span>, <span class="st">"cph"</span>))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>Maintainer<span class="sc">:</span> Brad Cannell <span class="sc">&lt;</span>brad.cannell<span class="sc">@</span>gmail.com<span class="sc">&gt;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>Description<span class="sc">:</span> The codebook package is intended to make it easy <span class="cf">for</span> users to </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  create <span class="fu">codebooks</span> (i.e. data dictionaries) directly from data frame.</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>License<span class="sc">:</span> MIT <span class="sc">+</span> file LICENSE</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>Encoding<span class="sc">:</span> UTF<span class="dv">-8</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>Roxygen<span class="sc">:</span> <span class="fu">list</span>(<span class="at">markdown =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>RoxygenNote<span class="sc">:</span> <span class="dv">7</span>.<span class="fl">1.2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here is a slightly more elaborate example from <code>meantables</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Package<span class="sc">:</span> meantables</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>Type<span class="sc">:</span> Package</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>Title<span class="sc">:</span> Make Quick Descriptive Tables <span class="cf">for</span> Continuous Variables</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>Description<span class="sc">:</span> Quickly make tables of descriptive <span class="fu">statistics</span> (i.e., counts, </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    means, confidence intervals) <span class="cf">for</span> continuous variables. This </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    package is designed to work <span class="cf">in</span> a Tidyverse pipeline, and consideration</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    has been given to get results from R to <span class="st">'Microsoft Word'</span> ® with minimal pain.</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>Version<span class="sc">:</span> <span class="dv">0</span>.<span class="fl">1.2</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>Authors<span class="sc">@</span>R<span class="sc">:</span> <span class="fu">person</span>(<span class="st">"Brad"</span>, <span class="st">"Cannell"</span>, <span class="at">email =</span> <span class="st">"brad.cannell@gmail.com"</span>,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">role =</span> <span class="fu">c</span>(<span class="st">"aut"</span>, <span class="st">"cre"</span>, <span class="st">"cph"</span>))</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>Maintainer<span class="sc">:</span> Brad Cannell <span class="sc">&lt;</span>brad.cannell<span class="sc">@</span>gmail.com<span class="sc">&gt;</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>License<span class="sc">:</span> MIT <span class="sc">+</span> file LICENSE</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>Encoding<span class="sc">:</span> UTF<span class="dv">-8</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>Suggests<span class="sc">:</span> </span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    knitr,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    rmarkdown,</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    testthat</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>VignetteBuilder<span class="sc">:</span> knitr</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>RoxygenNote<span class="sc">:</span> <span class="dv">7</span>.<span class="fl">1.2</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>Imports<span class="sc">:</span> </span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    dplyr,</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    tibble,</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    rlang,</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    stringr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p>Remember that Title Case is required for the Title</p></li>
+<li><p><strong>Do Not</strong> use <code>library(package)</code> in R scripts - instead add package dependencies to the <code>Imports</code> or <code>Remotes</code> field in the DESCRIPTION. <strong>Do</strong> use <code>library(package)</code> in vignette .Rmd files, and <strong>DO NOT</strong> add these package dependencies to the DESCRIPTION</p></li>
+<li><p>If we already added R scripts to the package directory, we need to open them now and make sure to remove all the <code>library()</code> functions.</p></li>
+<li><p>When adding CRAN packages to imports, you must first make sure they are installed.</p></li>
+<li><p><a href="https://github.com/hadley/devtools/blob/master/vignettes/dependencies.Rmd" target="_blank">Instructions for installing dependencies from sources other than CRAN are given here</a>.</p></li>
+</ul>
+</section>
+<section id="readme" class="level2" data-number="4.9">
+<h2 data-number="4.9" class="anchored" data-anchor-id="readme"><span class="header-section-number">4.9</span> Step 5: Add README</h2>
+<p>In <a href="https://r-pkgs.org/whole-game.html">R Packages, Chapter 2: The Whole Game</a>, Hadley and Jenny basically create all the package code before connecting their project to their remote repository on GitHub. I actually like to connect my project to GitHub before I write any code. I do this for several reasons, one of which is that I can start using GitHub’s issues and project boards right away to take notes and plan package development.</p>
+<p>And, I like to create the README file before I initialize Git or connect with GitHub. That’s what we will do in this step.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_readme_rmd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p>I generally just copy the Description section from the <code>DESCRIPTION</code> file and use it replace the “The goal of codebook is to …” sentence that that <code>use_readme_rmd()</code> creates by default.</p></li>
+<li><p>Comment out all of the code chunks that <code>use_readme_rmd()</code> creates by default.</p></li>
+<li><p>Add installation instructions to README. Although we haven’t created the repository yet, we know what it’s going to be called.</p></li>
+</ul>
+<p>The README file already contains the following lines:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="install_placeholder.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We just need to replace it with:</p>
+<p><strong>Make sure to set the <code>eval=FALSE</code> code chunk option.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("devtools")</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"brad-cannell/codebook"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p>Just replace “codebook” in the path above with the name of the repository for the package project you are currently working on.</p></li>
+<li><p>You can leave everything else as-is for now.</p></li>
+</ul>
+<p><strong>Render README</strong></p>
+<p>Don’t forget to render it to make README.md! The pre-commit hook should remind you if you try to commit README.Rmd, but not README.md, and also when README.md appears to be out-of-date.</p>
+<p>The very best way to render README.Rmd is with build_readme(), because it takes care to render with the most current version of your package, i.e.&nbsp;it installs a temporary copy from the current source.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">build_readme</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="git" class="level2" data-number="4.10">
+<h2 data-number="4.10" class="anchored" data-anchor-id="git"><span class="header-section-number">4.10</span> Step 6: Add Git</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_git</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Go ahead and commit all the files in the directory so far, and agree to restart R.</li>
+</ul>
+</section>
+<section id="github" class="level2" data-number="4.11">
+<h2 data-number="4.11" class="anchored" data-anchor-id="github"><span class="header-section-number">4.11</span> Step 7: Connect to GitHub</h2>
+<p><strong>Caution</strong></p>
+<p>So far, using this method will add the repo to my personal account (mbcann01), not to my organization. You can either:</p>
+<ul>
+<li><p>Create the repo manually on GitHub first, then follow GitHub’s instructions for syncing.</p></li>
+<li><p>After you create the repo on mbcann01, transfer ownership to brad-cannell in the Settings menu.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_github</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The function will do all of this:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="use_github.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Go ahead and agree to commit.</li>
+</ul>
+<section id="setting-up-github" class="level3" data-number="4.11.1">
+<h3 data-number="4.11.1" class="anchored" data-anchor-id="setting-up-github"><span class="header-section-number">4.11.1</span> Setting up GitHub</h3>
+<p>I added a page on the <a href="https://github.com/brad-cannell/templates/wiki/R-Package-Templates">templates package wiki</a> about setting up the issue tags, planner project boards, etc. That seems more durable writing them here.</p>
+</section>
+</section>
+<section id="package-functions" class="level2" data-number="4.12">
+<h2 data-number="4.12" class="anchored" data-anchor-id="package-functions"><span class="header-section-number">4.12</span> Step 8: Adding content to the package</h2>
+<p>At this point, we have an (empty) working package, which can be downloaded from our GitHub repository. Now, we just need to add the functions, data, and documentation that will make it actually worth using.</p>
+<section id="working-with-r-scripts" class="level3" data-number="4.12.1">
+<h3 data-number="4.12.1" class="anchored" data-anchor-id="working-with-r-scripts"><span class="header-section-number">4.12.1</span> Working with R scripts</h3>
+<ol type="1">
+<li><p>Don’t write or alter your functions in the console as you would in a typical interactive session. If you do, it’s easy for the version you’re using interactively and the version you are actually including in your package to get out of sync. Instead, <em>load</em> the package.</p></li>
+<li><p>Click the build tab &gt; More &gt; Load All, or <code>devtools::load_all</code>, or shift + cmd + L</p></li>
+</ol>
+</section>
+<section id="adding-help-pages-to-functions" class="level3" data-number="4.12.2">
+<h3 data-number="4.12.2" class="anchored" data-anchor-id="adding-help-pages-to-functions"><span class="header-section-number">4.12.2</span> Adding help pages to functions</h3>
+<p>Help pages are contained in .Rd files saved in the man folder. It’s best practice to use <code>roxygen</code> with your script files to automatically generate the .Rd files. Doing so helps to keep your scripts and your help pages in sync.</p>
+<p>To use roxygen:</p>
+<ol type="1">
+<li><p>Make sure the R script you want to document is active.</p></li>
+<li><p>Click Project Options &gt; Build Tools &gt; Generate documentation with Roxygen</p></li>
+<li><p>Place your cursor in the function you want to document</p></li>
+<li><p>Insert a Roxygen skeleton with the keyboard shortcut cmd + alt + shift + R</p></li>
+<li><p>After you’ve filled in the skeleton click Build &gt; More &gt; Document, or use the keyboard shortcut shift + cmd + D. RStudio will then automatically generate the help pages in your man folder.</p></li>
+<li><p>Click the build tab &gt; More &gt; Load All, or <code>devtools::load_all</code>, or shift + cmd + L</p></li>
+<li><p>Check your help page by typing ?function_name in the console.</p></li>
+</ol>
+</section>
+<section id="example-roxygen-header" class="level3" data-number="4.12.3">
+<h3 data-number="4.12.3" class="anchored" data-anchor-id="example-roxygen-header"><span class="header-section-number">4.12.3</span> Example <code>roxygen</code> header</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' @title Compact Table of Summary Statistics</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#' @description  Based on Stata's "tabstat" command. "tabstat displays summary</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#'  statistics for a series of numeric variables in one table.  It allows you</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#'  to specify the list of statistics to be displayed.  Statistics can be</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#'  calculated (conditioned on) another variable.  tabstat allows substantial</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">#'  flexibility in terms of the statistics presented and the format of the</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#'  table" (Stata, 2016).</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param x A continuous variable.</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param digits Rounds the values returned to the specified number of decimal</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co">#'  places (default 3).</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param stats Return specified statistics. Options include:</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co">#'  \describe{</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co">#'    \item{n}{Count of nonmissing values of x}</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co">#'    \item{nmiss}{Count of missing values of x}</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="co">#'    \item{ci}{95 percent confidence interval for the mean of x}</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="co">#'    \item{sum}{Sum of x}</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="co">#'    \item{max}{Maximum value of x}</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="co">#'    \item{min}{Minimum value of x}</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="co">#'    \item{range}{(Maximum value of x) - (minimum value of x)}</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="co">#'    \item{sd}{Standard deviation of x}</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="co">#'    \item{var}{Variance of x}</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a><span class="co">#'    \item{cv}{Coefficient of variation (sd / mean) of x}</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="co">#'    \item{sem}{Standard error of the mean of x}</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="co">#'    \item{skew}{Skewness of x}</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="co">#'    \item{kurt}{Kurtosis of x}</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="co">#'    \item{p1}{1st percentile of x}</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="co">#'    \item{p5}{5th percentile of x}</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a><span class="co">#'    \item{p10}{10th percentile of x}</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a><span class="co">#'    \item{p25}{25th percentile of x}</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a><span class="co">#'    \item{p50}{Median value of x}</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="co">#'    \item{median}{Median value of x}</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a><span class="co">#'    \item{p75}{75th percentile of x}</span></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a><span class="co">#'    \item{p90}{90th percentile of x}</span></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a><span class="co">#'    \item{p95}{95th percentile of x}</span></span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a><span class="co">#'    \item{p99}{99th percentile of x}</span></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a><span class="co">#'    \item{iqr}{Interquartile range (p75 - p25)}</span></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a><span class="co">#'    \item{q}{Equivalent to specifying p25 p50 p75}</span></span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a><span class="co">#'  }</span></span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a><span class="co">#' @return A data frame. By default, the data frame contains the variable name</span></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a><span class="co">#'  and mean.</span></span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a><span class="co">#' @export</span></span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a><span class="co">#' @references Stata 14 help for tabstat</span></span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a><span class="co">#'  \url{http://www.stata.com/help.cgi?tabstat}</span></span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a><span class="co">#' @examples</span></span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a><span class="co">#' data(mtcars)</span></span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a><span class="co">#' # Single univariate analysis with Defaults</span></span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a><span class="co">#' tabstat(mtcars$mpg)</span></span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a><span class="co">#' # Single univariate analysis with all stats</span></span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a><span class="co">#' tabstat(mtcars$mpg, stats = c("n", "nmiss", "ci", "sum", "max", "min",</span></span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a><span class="co">#' "range", "sd", "var", "cv", "sem", "skew", "kurt", "p1", "p5", "p10",</span></span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a><span class="co">#' "p25", "p50", "median", "p75", "p90", "p95", "p99", "iqr", "q"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="dont-run-the-examples" class="level3" data-number="4.12.4">
+<h3 data-number="4.12.4" class="anchored" data-anchor-id="dont-run-the-examples"><span class="header-section-number">4.12.4</span> Don’t run the examples</h3>
+<p>If you don’t want the examples to actually run, You can surround the example code with like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' @examples</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#' \dontrun{</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#' library(dplyr)</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#' library(meantables)</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#' data(mtcars)</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#' # Overall mean table with defaults</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">#' mtcars %&gt;%</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#'   mean_table(mpg)</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#' # A tibble: 1 x 9</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#'   response_var     n  mean    sd   sem   lcl   ucl   min   max</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">#'   &lt;chr&gt;        &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">#' 1 mpg             32  20.1  6.03  1.07  17.9  22.3  10.4  33.9</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="co">#' }</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="keyboard-shortcut-for-inserting-roxygen-comment" class="level3" data-number="4.12.5">
+<h3 data-number="4.12.5" class="anchored" data-anchor-id="keyboard-shortcut-for-inserting-roxygen-comment"><span class="header-section-number">4.12.5</span> Keyboard shortcut for inserting roxygen #’ comment</h3>
+<p>There doesn’t appear to be a keyboard shortcut, but this <a href="https://stackoverflow.com/questions/33399203/keyboard-shortcut-for-inserting-roxygen-comment-start#:~:text=But%20you%20can%20add%20an,%2Balt%2Bshift%2BR%20.">StackOverflow post</a> shows a good method for using RStudio’s find and replace.</p>
+</section>
+<section id="simulating-data" class="level3" data-number="4.12.6">
+<h3 data-number="4.12.6" class="anchored" data-anchor-id="simulating-data"><span class="header-section-number">4.12.6</span> Simulating data</h3>
+<p>The explanation in the <a href="https://r-pkgs.org/data.html">R Packages book</a> is good, short, and easy to follow. As explained in there, the code to create and/or clean the data will go in the <code>data-raw</code> directory and the data will eventually go in the <code>data/</code> directory.</p>
+<p>For the <code>codebook</code> package, I wanted to simulate some really simple data that could be used for package examples. Here’s how I did it.</p>
+<p>I started by running <code>usethis::use_data_raw("study")</code>. Among other things, this creates the R script to be used to simulate the <code>study</code> data. Here is the header for the study data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># =============================================================================</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Study data</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># This is the code to create the study data - a simulated data set that can be</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># used to demonstrate how to use the codebook package.</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Created: 2022-04-04</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Brad Cannell</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># =============================================================================</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Insert simulation code here...</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the simulated data to the data directory.</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_data</span>(study, <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="documenting-data" class="level3" data-number="4.12.7">
+<h3 data-number="4.12.7" class="anchored" data-anchor-id="documenting-data"><span class="header-section-number">4.12.7</span> Documenting data</h3>
+<blockquote class="blockquote">
+<p>Objects in data/ are always effectively exported (they use a slightly different mechanism than NAMESPACE but the details are not important). This means that they must be documented. Documenting data is like documenting a function with a few minor differences. Instead of documenting the data directly, you document the name of the dataset and save it in R/.<span class="citation" data-cites="Wickham2022-ff"><sup><a href="#ref-Wickham2022-ff" role="doc-biblioref">1</a></sup></span></p>
+</blockquote>
+<p>For example, the roxygen2 block used to document the <code>study</code> data in the <code>codebook</code> package is saved as R/data.R and looks something like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' Simulated study data.</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#' This is the code to create the study data - a simulated data set that can be</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#' used to demonstrate how to use the codebook package.</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#' @format A data frame with 20 rows and 4 variables:</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#' \describe{</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#'   \item{id}{participant id}</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#'   \item{gender}{participant gender, female/male}</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#'   \item{date}{date of enrollment}</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">#'   \item{height}{participant height, in inches}</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co">#' }</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="st">"study"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p>“<code>@format</code> gives an overview of the dataset. For data frames, you should include a definition list that describes each variable. It’s usually a good idea to describe variables’ units here.”<span class="citation" data-cites="Wickham2022-ff"><sup><a href="#ref-Wickham2022-ff" role="doc-biblioref">1</a></sup></span></p></li>
+<li><p>“Never<span class="citation" data-cites="export"><sup><a href="#ref-export" role="doc-biblioref"><strong>export?</strong></a></sup></span> a data set.”<span class="citation" data-cites="Wickham2022-ff"><sup><a href="#ref-Wickham2022-ff" role="doc-biblioref">1</a></sup></span></p></li>
+<li><p>The file is save as <code>R/data.R</code>.</p></li>
+</ul>
+<p><a href="https://r-pkgs.org/data.html#documenting-data">Click here to view the documentation for ggplot’s diamonds data</a>.</p>
+</section>
+<section id="documenting-package" class="level3" data-number="4.12.8">
+<h3 data-number="4.12.8" class="anchored" data-anchor-id="documenting-package"><span class="header-section-number">4.12.8</span> Documenting Package</h3>
+<p>You can use roxygen to provide a help page for your package as a whole. As described in <a href="https://r-pkgs.org/man.html#man-packages">section 10.6 of R Packages</a>,<span class="citation" data-cites="Wickham2022-ff"><sup><a href="#ref-Wickham2022-ff" role="doc-biblioref">1</a></sup></span></p>
+<blockquote class="blockquote">
+<p>You can use roxygen to provide a help page for your package as a whole. This is accessed with <code>package?foo</code>, and can be used to describe the most important components of your package. It’s a useful supplement to vignettes, as described in the next chapter.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>There’s no object that corresponds to a package, so you need to document NULL, and then manually label it with <code>@docType</code> package and <code>@name &lt;package-name&gt;</code>. This is also an excellent place to use the <code>@section tag</code> to divide up page into useful categories.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>I usually put this documentation in a file called <code>&lt;package-name&gt;.R</code>. It’s also a good place to put the package level import statements that you’ll learn about in imports.</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' foo: A package for computating the notorious bar statistic</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#' The foo package provides three categories of important functions:</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">#' foo, bar and baz.</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">#' </span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">#' @section Foo functions:</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">#' The foo functions ...</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co">#' @docType package</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co">#' @name foo</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="cn">NULL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="testing" class="level2" data-number="4.13">
+<h2 data-number="4.13" class="anchored" data-anchor-id="testing"><span class="header-section-number">4.13</span> Step 9: Creating unit tests</h2>
+<p>Testing is an important part of programming. For detailed information on testing see the appropriate <a href="https://r-pkgs.org/tests.html">testing chapter in R Packages</a>.<span class="citation" data-cites="Wickham2022-ff"><sup><a href="#ref-Wickham2022-ff" role="doc-biblioref">1</a></sup></span></p>
+<p>Get started with <code>devtools::use_testthat()</code>.</p>
+<ol type="1">
+<li><p>Create test file. Must be in <code>tests/testhat</code>. File name should start with test_ and the function name. For example, <code>test_check_catvars</code>.</p></li>
+<li><p>Modify your code or tests</p></li>
+<li><p>Test your package with Ctrl/Cmd + Shift + T or <code>devtools::test()</code>.</p></li>
+<li><p>Repeat until all tests pass.</p></li>
+</ol>
+</section>
+<section id="vignettes" class="level2" data-number="4.14">
+<h2 data-number="4.14" class="anchored" data-anchor-id="vignettes"><span class="header-section-number">4.14</span> Step 10: Vignettes</h2>
+<p>There are some great vignette resources on the internet:</p>
+<ul>
+<li><p><a href="http://r-pkgs.had.co.nz/vignettes.html" target="_blank">Chapter on vignettes in Hadley’s Package book</a></p></li>
+<li><p><a href="ftp://cran.r-project.org/pub/R/doc/contrib/Leisch-CreatingPackages.pdf" target="_blank">Leisch’s creating R packages tutorial</a></p></li>
+<li><p><a href="http://rmflight.github.io/posts/2014/07/vignetteAnalysis.html" target="_blank">Flight’s article on creating an analysis as a package and vignette</a></p></li>
+</ul>
+<section id="to-create-a-vignette" class="level3" data-number="4.14.1">
+<h3 data-number="4.14.1" class="anchored" data-anchor-id="to-create-a-vignette"><span class="header-section-number">4.14.1</span> To create a vignette:</h3>
+<ul>
+<li><p>run <code>usethis::use_vignette("my-vignette")</code></p></li>
+<li><p>Open <code>vignettes/my-vignette.Rmd</code></p></li>
+<li><p>Create the vignette</p></li>
+<li><p>Unlike R scripts, install and load packages directly in the vignettes.</p></li>
+<li><p>Knit the vignette - The default action will be to create a version of the vignette that can be viewed in RStudio. However, <code>devtools::install_github()</code> (and friends) will not build vignettes by default because they’re time consuming and may require additional packages. So, in order to be able to view the vignette in RStudio, you must use vignettes = TRUE, e.g., devtools::install_github(“brad-cannell/bfuncs”, build_vignettes = TRUE) instead.</p></li>
+<li><p>Use <code>devtools::build_vignettes()</code> to create an html version of the vignette in <code>inst/doc</code> that you can provide a link to on your Github README page. By default, these folders will be added to .gitignore. Remove them from .gitignore to be able to view/use them on Github. Create a rawgit version of the html vignette file, and providea link to it on README.</p></li>
+<li><p>use use <code>devtools::build()</code> to create a package bundle with the vignettes included. RStudio’s “Build &amp; reload” does not build vignettes to save time.</p></li>
+<li><p>When you add or update vignettes, push to Github again.</p></li>
+</ul>
+</section>
+<section id="vignette-notes" class="level3" data-number="4.14.2">
+<h3 data-number="4.14.2" class="anchored" data-anchor-id="vignette-notes"><span class="header-section-number">4.14.2</span> Vignette Notes:</h3>
+<p>This builds the vignettes, and is probably fine for a regular package of functions. However, when using packages as a means for reproducible, self-contained analysis projects, the vignettes have greater importance, and by default are not easily accessible.<br>
+Need to find a way to make the vignettes more “front and center”</p>
+<ul>
+<li><p>Create a help page for the entire package that includes links to the vignettes?</p></li>
+<li><p>Include links to the README.md file and upload to GitHub (with the data sets excluded)?</p></li>
+<li><p>Remember to use <code>system.file()</code> when reading in data inside a code chunk. If you have trouble getting it to work, try build &amp; reload.</p></li>
+<li><p>To save a data frame to <code>data/</code> inside a vignette, you can use the <a href="https://github.com/krlmlr/rprojroot" target="_blank">rprojroot package</a>. use <code>rprojroot::find_root("DESCRIPTION")</code></p></li>
+</ul>
+</section>
+<section id="pkgdown" class="level3" data-number="4.14.3">
+<h3 data-number="4.14.3" class="anchored" data-anchor-id="pkgdown"><span class="header-section-number">4.14.3</span> Pkgdown</h3>
+<p>I haven’t tried the <a href="https://pkgdown.r-lib.org/">pkgdown</a> package yet, but I think it is essentially a collection supercharged vignettes for your package. I’d like to try it soon.</p>
+</section>
+</section>
+<section id="cran" class="level2" data-number="4.15">
+<h2 data-number="4.15" class="anchored" data-anchor-id="cran"><span class="header-section-number">4.15</span> Submitting to CRAN</h2>
+<p>You can also do this stuff when you complete a “version” of the package even if you aren’t submitting it to CRAN.</p>
+<p>Useful website: http://r-pkgs.had.co.nz/release.html</p>
+<ol type="1">
+<li><p>If the version number is set to a development version (e.g., .9000), change it to a number that meets the CRAN requirements (i.e., x.x.x)</p>
+<ul>
+<li>Make this change in <code>Description</code> and in <code>News.md</code>.</li>
+</ul></li>
+<li><p>Make sure you using the most updated code before checks. devtools::load_all() and devtools::install()</p></li>
+<li><p>Update README before submission. It should roughly match the examples in the <a href="https://r-pkgs.org/other-markdown.html#sec-readme">R Packages book</a>.</p>
+<ul>
+<li>Update <code>README.Rmd</code>, not <code>README.md</code>.<br>
+</li>
+<li>Knit <code>README.Rmd</code> after making changes. This will automatically update <code>README.md</code></li>
+</ul></li>
+<li><p>Update documentation/vignettes using <code>devtools::document()</code></p></li>
+<li><p>Update news.md. Here’s dplyr’s: https://raw.githubusercontent.com/tidyverse/dplyr/master/NEWS.md</p>
+<ul>
+<li><p>Here’s the news.md section from R Packages: https://r-pkgs.org/other-markdown.html#news</p></li>
+<li><p>Remember to add news.md to buildignore. <code>usethis::use_build_ignore("news.md")</code></p></li>
+<li><p>Here’s a basic news.md from freqtables:</p></li>
+</ul></li>
+</ol>
+<pre><code># freqtables (development version)
+
+# freqtables 0.1.1
+
+* Add an informative error for user if they forget to pass a data frame to freq_table() (#29)
+
+# freqtables 0.1.0
+
+* First release on CRAN</code></pre>
+<ol start="6" type="1">
+<li><p>If you were on a development branch, merge with main branch.</p></li>
+<li><p>Use <code>devtools::check()</code></p></li>
+<li><p>Use <code>devtools::check_win_devel()</code> to test the package on Windows</p></li>
+<li><p>Use <code>devtools::check_rhub()</code></p></li>
+<li><p>If you don’t plan to submit to CRAN, this is probably a good time to use <code>devtools::install()</code> to re-build and install the package locally.</p></li>
+<li><p>Update <code>cran-comments</code>.</p></li>
+</ol>
+<ul>
+<li><p>Remember to add news.md to buildignore <code>usethis::use_build_ignore("cran-comments.md")</code> if you haven’t already.</p></li>
+<li><p>If this is a resubmission, add a bulleted list of changes made under ## Resubmission.</p></li>
+<li><p>Here is a link to the cran-comments section of R Packages: https://r-pkgs.org/release.html#sec-release-process</p></li>
+<li><p>Here’s a basic cran-comments.md from freqtables:</p></li>
+</ul>
+<pre><code>## Test environments
+* local OS X install, R 4.1.3
+* Ubuntu Linux 20.04.1 LTS, R-release, GCC
+* win-builder (devel and release)
+
+## R CMD check results
+There were no ERRORs, WARNINGs or NOTEs
+
+## Downstream dependencies
+There are currently no downstream dependencies for this package.</code></pre>
+<ol start="13" type="1">
+<li>Submit with <code>devtools::release()</code></li>
+</ol>
+<p>After the package is accepted, do this stuff: http://r-pkgs.had.co.nz/release.html#post-release</p>
+<ul>
+<li><p>If you use GitHub, go to the repository release page. Create a new release with tag version v1.2.3 (i.e.&nbsp;“v” followed by the version of your package). Copy and paste the contents of the relevant NEWS.md section into the release notes.</p></li>
+<li><p>Add the .9000 suffix to the Version field in the DESCRIPTION to indicate that this is a development version. Create a new heading in NEWS.md and commit the changes.</p></li>
+</ul>
+</section>
+<section id="package-evolution" class="level2" data-number="4.16">
+<h2 data-number="4.16" class="anchored" data-anchor-id="package-evolution"><span class="header-section-number">4.16</span> Package evolution</h2>
+<p>Here are some good pages on maintaining and evolving packages over time.</p>
+<ul>
+<li><p><a href="https://devguide.ropensci.org/evolution.html#evolution">rOpenSci Packages: Development, Maintenance, and Peer Review. Chapter 15: Package evolution - changing stuff in your package</a></p></li>
+<li><p><a href="https://lifecycle.r-lib.org/">The lifecycle package</a></p></li>
+</ul>
+</section>
+<section id="other-random-notes" class="level2" data-number="4.17">
+<h2 data-number="4.17" class="anchored" data-anchor-id="other-random-notes"><span class="header-section-number">4.17</span> Other random notes</h2>
+<section id="get-rid-of-.ds_store" class="level3" data-number="4.17.1">
+<h3 data-number="4.17.1" class="anchored" data-anchor-id="get-rid-of-.ds_store"><span class="header-section-number">4.17.1</span> Get rid of .DS_Store</h3>
+<p>The <code>.DS_Store</code> file can be an annoyance when working with Git on MacOS. <a href="https://stackoverflow.com/questions/107701/how-can-i-remove-ds-store-files-from-a-git-repository/107921">Here is a link</a> to instructions for removing <code>.DS_Store</code> from your repository. Do it early and never worry about it again.</p>
+<p>In the terminal, run the following code from the root directory:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove existing files from the repository:</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-name</span> <span class="st">"*.DS_Store"</span> <span class="at">-type</span> f <span class="at">-exec</span> git-rm {} <span class="dt">\;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add .DS_Store to .gitignore</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> .DS_Store <span class="op">&gt;&gt;</span> .gitignore</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Commit the file to the repo</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .gitignore</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">'.DS_Store banished!'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="file-mode-changes" class="level3" data-number="4.17.2">
+<h3 data-number="4.17.2" class="anchored" data-anchor-id="file-mode-changes"><span class="header-section-number">4.17.2</span> File mode changes</h3>
+<p>When working on Epi III – and I think this could be an issue with using git on OneDrive more generally – I would have to recommit files when I changed computers. Not because the <strong>content</strong> of the file had changed, but because something called the <strong>file mode</strong> had changed. I searched SO and seemed to fix it with this post: https://stackoverflow.com/questions/1580596/how-do-i-make-git-ignore-file-mode-chmod-changes</p>
+<p>Open terminal and type:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config core.fileMode false</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="icon-files" class="level3" data-number="4.17.3">
+<h3 data-number="4.17.3" class="anchored" data-anchor-id="icon-files"><span class="header-section-number">4.17.3</span> Icon files</h3>
+<p>Another issue I encountered when working on Epi III – and I think this could be an issue with using git on OneDrive more generally – was the existence of these “Icon” files every time I switched computers. However, they didn’t seem to actually exist (or at least they weren’t visible), and ignoring them in the usual way did not seem to <em>actually</em> ignore them. I searched SO and seemed to fix it with this post: https://stackoverflow.com/questions/17556250/how-to-ignore-icon-in-git</p>
+<p>Open terminal and type:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="bu">printf</span> <span class="st">"Icon\r\r"</span> <span class="op">&gt;&gt;</span> .gitignore</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="errors-warnings-notes" class="level2" data-number="4.18">
+<h2 data-number="4.18" class="anchored" data-anchor-id="errors-warnings-notes"><span class="header-section-number">4.18</span> Errors, warnings, notes</h2>
+<p>Below are some common errors, warnings and notes I’ve encountered during build tests.</p>
+<blockquote class="blockquote">
+<p>W checking for unstated dependencies in examples … ‘library’ or ‘require’ call not declared from: ‘tidyverse’ E checking examples (707ms) Running examples in ‘freqtables-Ex.R’ failed The error most likely occurred in:</p>
+</blockquote>
+<p>I got this error because I had <code>library(tidyverse)</code> in the<span class="citation" data-cites="examples"><sup><a href="#ref-examples" role="doc-biblioref"><strong>examples?</strong></a></sup></span> section of my roxygen2 header in one of my R scripts, but I did not have <code>tidyverse</code> in the Imports section of my DESCRIPTION file. I could add <code>tidyverse</code> to the DESCRIPTION file (<code>usethis::use_package("tidyverse", type = "Imports")</code>). However, in this case I chose to use <code>library(dplyr)</code>, which was already in the Imports section of my DESCRIPTION file, instead.</p>
+<blockquote class="blockquote">
+<p>W checking dependencies in R code (369ms) ‘::’ or ‘:::’ import not declared from: ‘rlang’</p>
+</blockquote>
+<p>To fix this one simply run the following code in the console: <code>usethis::use_package("rlang", type = "Imports")</code></p>
+<blockquote class="blockquote">
+<p>Warning: ‘inst/doc’ files … ignored as vignettes have been rebuilt.</p>
+</blockquote>
+<p>Just ignore this one.</p>
+<blockquote class="blockquote">
+<p>Warning in strptime(xx, f &lt;- “%Y-%m-%d %H:%M:%OS”, tz = tz) : unknown timezone ‘zone/tz/2017c.1.0/zoneinfo/America/Chicago’</p>
+</blockquote>
+<p>Just ingnore this one. It’s a problem with my computer, not with the package code.</p>
+<blockquote class="blockquote">
+<p>Non-standard files/directories found at top level: ‘develop_test_table.Rmd’ ‘develop_test_table.nb.html’</p>
+</blockquote>
+<p>Need to delete these files when I’m done developing chi-square test.</p>
+<blockquote class="blockquote">
+<p>Prevents R CMD check: “no visible binding for global variable ‘.’”</p>
+</blockquote>
+<p>Put the following (for example) directly inside the function definition in the R script where the function is defined:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------------</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Prevents R CMD check: "no visible binding for global variable ‘.’"</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------------</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> n_total <span class="ot">=</span> prop <span class="ot">=</span> t_crit <span class="ot">=</span> se <span class="ot">=</span> lcl_wald <span class="ot">=</span> ucl_wald <span class="ot">=</span> percent <span class="ot">=</span> <span class="cn">NULL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>N checking R code for possible problems (1.8s) get_group_n: no visible global function definition for ‘%&gt;%’ Undefined global functions or variables: %&gt;%</p>
+</blockquote>
+<p><a href="http://r-pkgs.had.co.nz/namespace.html#imports">Info on fixing this issue</a></p>
+<p>Short answer: Add the following directly inside the roxygen2 header in the R script where the function is defined: <code>@importFrom dplyr %&gt;%</code>. You must also make sure that it gets to the NAMESPACE. Run <code>usethis::use_namespace()</code> and then <code>devtools::document()</code> to get it into NAMESPACE.</p>
+<blockquote class="blockquote">
+<p>Non-standard file/directory found at top level: ‘meantables_hex’</p>
+</blockquote>
+<p>I got this error after submitting meantables to CRAN. The problem is with the hex sticker file in the meantable hex sticker I added for the README. This SO issue gives some advice: https://stackoverflow.com/questions/44113759/note-or-warning-from-package-check-when-readme-md-includes-images</p>
+<p>I moved the stickers to <code>man/figures</code>. It seems to have solved the problem.</p>
+
+
+<div id="refs" class="references csl-bib-body" role="list">
+<div id="ref-Wickham2022-ff" class="csl-entry" role="listitem">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Wickham H, Bryan J. <em><span>R</span> Packages</em>. second.; 2022.</div>
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../chapters/programming_with_functions/programming_with_functions.html" class="pagination-link" aria-label="Programming with functions">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programming with functions</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>R for Epidemiology</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/brad-cannell/test_quarto_book/edit/main/chapters/packages_quick_start/packages_quick_start.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

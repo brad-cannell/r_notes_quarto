@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Brad Cannell">
-<meta name="dcterms.date" content="2024-06-06">
 
-<title>R Notes</title>
+<title>R Notes – 1&nbsp; RStudio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,24 +23,25 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./chapters/rstudio/rstudio.html" rel="next">
-<link href="./cover.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../chapters/regex/regex.html" rel="next">
+<link href="../../index.html" rel="prev">
+<link href="../../cover.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -83,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/rstudio/rstudio.html">Programming</a></li><li class="breadcrumb-item"><a href="../../chapters/rstudio/rstudio.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">RStudio</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -98,7 +97,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">R Notes</a> 
+      <a href="../../">R Notes</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/brad-cannell/test_quarto_book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
 </div>
@@ -113,7 +112,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
@@ -128,25 +127,25 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/rstudio/rstudio.html" class="sidebar-item-text sidebar-link">
+  <a href="../../chapters/rstudio/rstudio.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">RStudio</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/regex/regex.html" class="sidebar-item-text sidebar-link">
+  <a href="../../chapters/regex/regex.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Regular Expressions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/programming_with_functions/programming_with_functions.html" class="sidebar-item-text sidebar-link">
+  <a href="../../chapters/programming_with_functions/programming_with_functions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programming with functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/packages_quick_start/packages_quick_start.html" class="sidebar-item-text sidebar-link">
+  <a href="../../chapters/packages_quick_start/packages_quick_start.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Packages: Quick Start</span></span></a>
   </div>
 </li>
@@ -190,38 +189,26 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <li><a href="#find-and-replace-tool" id="toc-find-and-replace-tool" class="nav-link active" data-scroll-target="#find-and-replace-tool"><span class="header-section-number">1.1</span> Find and Replace Tool</a>
   <ul class="collapse">
-  <li><a href="#organization" id="toc-organization" class="nav-link" data-scroll-target="#organization">Organization</a></li>
+  <li><a href="#regular-expressions" id="toc-regular-expressions" class="nav-link" data-scroll-target="#regular-expressions"><span class="header-section-number">1.1.1</span> Regular Expressions</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/brad-cannell/test_quarto_book/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/brad-cannell/test_quarto_book/edit/main/chapters/rstudio/rstudio.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/rstudio/rstudio.html">Programming</a></li><li class="breadcrumb-item"><a href="../../chapters/rstudio/rstudio.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">RStudio</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">R Notes</h1>
+<h1 class="title"><span id="sec-regex" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">RStudio</span></span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Brad Cannell </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">June 6, 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -231,34 +218,22 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level1 unnumbered">
-<h1 class="unnumbered">Introduction</h1>
-<p>Welcome to Brad Cannell’s R Notes!</p>
-<p>This repository is for a <a href="https://quarto.org/">Quarto</a> version Brad Cannell’s R Notes. This repository is primarily intended to be helpful to me, but even better if you find it useful too! This version of my R Notes replaces the previous <a href="https://brad-cannell.github.io/r_notes/">Bookdown version</a>.</p>
-<p>Why am I doing this (as opposed to just keeping notes locally)?</p>
-<ul>
-<li><p>Better organized (e.g., chapter structure and search).</p></li>
-<li><p>Easy access – just click on the bookmark on web browser.</p></li>
-<li><p>Practice using Quarto.</p></li>
-<li><p>Might help with R4Epi – This can be sort of a sandbox for developing before I add things to R4Epi.</p></li>
-</ul>
-<section id="organization" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="organization">Organization</h2>
-<p>These notes are loosely organized into the following parts:</p>
-<ul>
-<li><p><strong>Programming:</strong> Notes about optimizing code, writing functions, creating packages, and repeated operations.</p></li>
-<li><p><strong>Data Simulation:</strong> Notes about simulating data.</p></li>
-<li><p><strong>Working with external files:</strong> Notes about things like data transfer, web scraping, PDF scraping, and using Officer to scrape Microsoft Office documents.</p></li>
-<li><p><strong>Data management:</strong> Notes about manipulating/transforming/filtering data that is already in R.</p></li>
-<li><p><strong>Analysis:</strong> Notes about creating numerical summaries of data.</p></li>
-<li><p><strong>Data visualization:</strong> Notes about graphical summaries of data. A lot of this will be about ggplot.</p></li>
-<li><p><strong>Presenting results:</strong> Notes about making numerical and graphical summaries accessible outside of R. This can include webpages, static dashboards, PDF documents, Microsoft Office documents, etc. This does not include Shiny apps.</p></li>
-<li><p><strong>Collaboration:</strong> Notes about collaborative coding. This is primarily notes on using Git and GitHub.</p></li>
-<li><p><strong>Shiny:</strong> I am no longer keeping notes about Shiny here. Shiny has it’s own notebook. https://brad-cannell.github.io/shiny_notes_quarto/</p></li>
-</ul>
-<p><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a><br>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
+<p>A collection of notes about programming in RStudio – including notes about modifying RStudio locally.</p>
+<section id="find-and-replace-tool" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="find-and-replace-tool"><span class="header-section-number">1.1</span> Find and Replace Tool</h2>
+<p>Notes on using RStudio’s Find and Replace tool. This can be a real time saver!</p>
+<section id="regular-expressions" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="regular-expressions"><span class="header-section-number">1.1.1</span> Regular Expressions</h3>
+<p>These notes should be specifically about using Regular Expressions <em>in RStudio’s Find and Replace tool</em>. See <a href="../regex/regex.html" class="quarto-xref"><span>Chapter 2</span></a> for notes about regular expressions in general.</p>
+<section id="substituions" class="level4" data-number="1.1.1.1">
+<h4 data-number="1.1.1.1" class="anchored" data-anchor-id="substituions"><span class="header-section-number">1.1.1.1</span> Substituions</h4>
+<p>I was working on making updates to Intro to R. While converting Rmd documents to Qmd documents, I was looking for a way to use the find and replace tool to convert the code chunk options from their knitr style (i.e., <code>{eval=FALSE}</code>) to the Quarto style (i.e., <code>#| eval: false</code>). Using this <a href="https://stackoverflow.com/questions/30896845/r-regex-to-find-and-replace-code-in-rstudio">SO post</a>, I did some experimenting in <a href="https://regex101.com/r/21wSPU/1">regex101</a> and found a solution. Here it is:</p>
+<p>Find code (with leading space): <code>eval=FALSE}</code></p>
+<p>Replace code: <code>}\n#| eval: false\n</code></p>
+<p>It turns out that the substitution part is pretty straightforward in this case, but I think that stack overflow post will be useful for more complicated cases when I have to use capture groups as well.</p>
 
 
+</section>
 </section>
 </section>
 
@@ -685,10 +660,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../../index.html" class="pagination-link" aria-label="Introduction">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introduction</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./chapters/rstudio/rstudio.html" class="pagination-link" aria-label="RStudio">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">RStudio</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../chapters/regex/regex.html" class="pagination-link" aria-label="Regular Expressions">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Regular Expressions</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -700,7 +678,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/brad-cannell/test_quarto_book/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/brad-cannell/test_quarto_book/edit/main/chapters/rstudio/rstudio.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>
