@@ -1,0 +1,15 @@
+# RStudio {#sec-regex}
+
+A collection of notes about programming in RStudio -- including notes about modifying RStudio locally.
+
+## Find and Replace Tool
+
+Notes on using RStudio's Find and Replace tool. This can be a real time saver!
+
+### Regular Expressions
+
+These notes should be specifically about using Regular Expressions _in RStudio's Find and Replace tool_. See @sec-regex for notes about regular expressions in general.
+
+#### Substituions
+
+I was working on making updates to Intro to R. While converting Rmd documents to Qmd documents, I was looking for a way to use the find and replace tool to convert the code chunk options from their knitr style (i.e., `{eval=FALSE}`) to the Quarto style (i.e., `#| eval: false`). Using this [SO post](https://stackoverflow.com/questions/30896845/r-regex-to-find-and-replace-code-in-rstudio), I did some experimenting in [regex101](https://regex101.com/r/21wSPU/1) and found a solution. It turns out that the substitution part is pretty straightforward in this case, but I think that stack overflow post will be useful for more complicated cases when I have to use capture groups as well.

@@ -62,8 +62,9 @@ book:
     # The qmd file method does not look good in pdf format.
     - part: "Programming"
       # Make sure to type "chapters" again under each part.
-      # chapters: 
-      # - chapters/book_options.qmd
+      chapters:
+      - chapters/rstudio/rstudio.qmd
+      - chapters/regex/regex.qmd
       
     - part: "Data Simulation"
       # chapters: 
