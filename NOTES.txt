@@ -1,8 +1,0 @@
-# =============================================================================
-# Quarto version of my R notes
-# Brad Cannell
-# 2024-03-28
-# =============================================================================
-
-I created this today, but I don't have time to actually work on it. Just 
-casually work on it when you can.
