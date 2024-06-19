@@ -1,0 +1,91 @@
+# Stata {#sec-stata}
+
+While working on the L2C main outcomes paper, I wanted to double check some of my results in Stata. It turns out you can run Stata code directly from within R; albeit with some limitations. This note needs some work, but the basics are here.
+
+```{r}
+#| echo: false
+
+# Silently load the mtcars data
+data("mtcars")
+
+# For testing: Export the mtcars data to desktop for testing in Stata.
+# haven::write_dta(mtcars, "/Users/bradcannell/Desktop/mtcars.dta")
+```
+
+The first thing we need to do is load the `RStata` package.
+
+```{r}
+library(dplyr, warn.conflicts = FALSE)
+library(RStata) # For Stata
+```
+
+Then, we need to tell R where to find Stata on our local computer and which version of Stata we are using. 
+
+```{r}
+# For Stata
+options("RStata.StataPath" = "/Applications/Stata/StataMP.app/Contents/MacOS/stata-mp")
+options("RStata.StataVersion" = 18)
+```
+
+Then, we can run Stata directly in R code chunks in RStudio. For example, let's calculate the frequency and percentage of observations of each cylinder type in the `mtcars` data set.
+
+1. Pass a Stata command (as a character string) -- or a do file -- to the `src` argument of the `stata()` function.
+2. Pass the name of a data frame that currently exists in the R global environment to the `data.in` argument of the `stata()` function.
+
+```{r}
+stata(
+  src = "tabulate cyl",
+  data.in = mtcars
+)
+```
+
+This works, but we can't use these estimates directly. However, we can save the estimation results and use them in further operations. See this [SO post](https://stackoverflow.com/questions/57881623/how-to-capture-rstata-package-output-for-subsequent-processing-in-r) for more discussion. 
+
+```{r}
+# Create a temp file to save the results to.
+# I don't want to create a dta file on my desktop every time I build this book.
+tmpdir <- tempfile()
+dir.create(tmpdir, showWarnings = FALSE, recursive = TRUE)
+tempfile <- file.path(tmpdir, "stata_out.dta")
+```
+
+```{r}
+stata_tabulate_results <- stata(
+  paste0( # Using past to inject the temp file. Normally this isn't necessary
+    '
+    tabulate cyl, matcell(x)
+    clear
+    svmat x
+    ',
+    'save ', tempfile
+  ),
+  data.in = mtcars,
+  data.out = TRUE
+)
+```
+
+Without the tempfile code, it would look like this.
+
+```{r}
+#| eval: false
+
+stata_tabulate_results <- stata(
+  '
+  tabulate cyl, matcell(x)
+  clear
+  svmat x
+  save "/Users/bradcannell/Desktop/t.dta"
+  ',
+  data.in = mtcars,
+  data.out = TRUE
+)
+```
+
+I still have a lot to learn about saving the results from Stata commands. In the future, we may want to add notes from "/Users/bradcannell/Library/CloudStorage/Dropbox/Stata/Notes/Example Do Files/Matrix and Saved Results.do"
+
+```{r}
+#| label: stata-clean-up
+#| echo: false
+
+rm(list = ls())
+```

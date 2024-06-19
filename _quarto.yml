@@ -67,6 +67,7 @@ book:
       - chapters/regex/regex.qmd
       - chapters/programming_with_functions/programming_with_functions.qmd
       - chapters/packages_quick_start/packages_quick_start.qmd
+      - chapters/stata/stata.qmd
       
     - part: "Data Simulation"
       # chapters: 
