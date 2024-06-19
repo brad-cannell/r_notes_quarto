@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R Notes – 1&nbsp; RStudio</title>
+<title>R Notes – 5&nbsp; Stata</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +64,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../chapters/regex/regex.html" rel="next">
-<link href="../../index.html" rel="prev">
+<link href="../../chapters/packages_quick_start/packages_quick_start.html" rel="prev">
 <link href="../../cover.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -82,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/rstudio/rstudio.html">Programming</a></li><li class="breadcrumb-item"><a href="../../chapters/rstudio/rstudio.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">RStudio</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/rstudio/rstudio.html">Programming</a></li><li class="breadcrumb-item"><a href="../../chapters/stata/stata.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Stata</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -127,7 +160,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/rstudio/rstudio.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../chapters/rstudio/rstudio.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">RStudio</span></span></a>
   </div>
 </li>
@@ -151,7 +184,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/stata/stata.html" class="sidebar-item-text sidebar-link">
+  <a href="../../chapters/stata/stata.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Stata</span></span></a>
   </div>
 </li>
@@ -190,24 +223,15 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#find-and-replace-tool" id="toc-find-and-replace-tool" class="nav-link active" data-scroll-target="#find-and-replace-tool"><span class="header-section-number">1.1</span> Find and Replace Tool</a>
-  <ul class="collapse">
-  <li><a href="#regular-expressions" id="toc-regular-expressions" class="nav-link" data-scroll-target="#regular-expressions"><span class="header-section-number">1.1.1</span> Regular Expressions</a></li>
-  </ul></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/brad-cannell/test_quarto_book/edit/main/chapters/rstudio/rstudio.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/rstudio/rstudio.html">Programming</a></li><li class="breadcrumb-item"><a href="../../chapters/rstudio/rstudio.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">RStudio</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/rstudio/rstudio.html">Programming</a></li><li class="breadcrumb-item"><a href="../../chapters/stata/stata.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Stata</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-regex" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">RStudio</span></span></h1>
+<h1 class="title"><span id="sec-stata" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Stata</span></span></h1>
 </div>
 
 
@@ -224,24 +248,100 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>A collection of notes about programming in RStudio – including notes about modifying RStudio locally.</p>
-<section id="find-and-replace-tool" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="find-and-replace-tool"><span class="header-section-number">1.1</span> Find and Replace Tool</h2>
-<p>Notes on using RStudio’s Find and Replace tool. This can be a real time saver!</p>
-<section id="regular-expressions" class="level3" data-number="1.1.1">
-<h3 data-number="1.1.1" class="anchored" data-anchor-id="regular-expressions"><span class="header-section-number">1.1.1</span> Regular Expressions</h3>
-<p>These notes should be specifically about using Regular Expressions <em>in RStudio’s Find and Replace tool</em>. See <a href="../regex/regex.html" class="quarto-xref"><span>Chapter 2</span></a> for notes about regular expressions in general.</p>
-<section id="substituions" class="level4" data-number="1.1.1.1">
-<h4 data-number="1.1.1.1" class="anchored" data-anchor-id="substituions"><span class="header-section-number">1.1.1.1</span> Substituions</h4>
-<p>I was working on making updates to Intro to R. While converting Rmd documents to Qmd documents, I was looking for a way to use the find and replace tool to convert the code chunk options from their knitr style (i.e., <code>{eval=FALSE}</code>) to the Quarto style (i.e., <code>#| eval: false</code>). Using this <a href="https://stackoverflow.com/questions/30896845/r-regex-to-find-and-replace-code-in-rstudio">SO post</a>, I did some experimenting in <a href="https://regex101.com/r/21wSPU/1">regex101</a> and found a solution. Here it is:</p>
-<p>Find code (with leading space): <code>eval=FALSE}</code></p>
-<p>Replace code: <code>}\n#| eval: false\n</code></p>
-<p>It turns out that the substitution part is pretty straightforward in this case, but I think that stack overflow post will be useful for more complicated cases when I have to use capture groups as well.</p>
+<p>While working on the L2C main outcomes paper, I wanted to double check some of my results in Stata. It turns out you can run Stata code directly from within R; albeit with some limitations. This note needs some work, but the basics are here.</p>
+<p>The first thing we need to do is load the <code>RStata</code> package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr, <span class="at">warn.conflicts =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RStata) <span class="co"># For Stata</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then, we need to tell R where to find Stata on our local computer and which version of Stata we are using.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For Stata</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="st">"RStata.StataPath"</span> <span class="ot">=</span> <span class="st">"/Applications/Stata/StataMP.app/Contents/MacOS/stata-mp"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="st">"RStata.StataVersion"</span> <span class="ot">=</span> <span class="dv">18</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then, we can run Stata directly in R code chunks in RStudio. For example, let’s calculate the frequency and percentage of observations of each cylinder type in the <code>mtcars</code> data set.</p>
+<ol type="1">
+<li>Pass a Stata command (as a character string) – or a do file – to the <code>src</code> argument of the <code>stata()</code> function.</li>
+<li>Pass the name of a data frame that currently exists in the R global environment to the <code>data.in</code> argument of the <code>stata()</code> function.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stata</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">src =</span> <span class="st">"tabulate cyl"</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data.in =</span> mtcars</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>. tabulate cyl
+
+        cyl |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          4 |         11       34.38       34.38
+          6 |          7       21.88       56.25
+          8 |         14       43.75      100.00
+------------+-----------------------------------
+      Total |         32      100.00</code></pre>
+</div>
+</div>
+<p>This works, but we can’t use these estimates directly. However, we can save the estimation results and use them in further operations. See this <a href="https://stackoverflow.com/questions/57881623/how-to-capture-rstata-package-output-for-subsequent-processing-in-r">SO post</a> for more discussion.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a temp file to save the results to.</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># I don't want to create a dta file on my desktop every time I build this book.</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>tmpdir <span class="ot">&lt;-</span> <span class="fu">tempfile</span>()</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(tmpdir, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>tempfile <span class="ot">&lt;-</span> <span class="fu">file.path</span>(tmpdir, <span class="st">"stata_out.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>stata_tabulate_results <span class="ot">&lt;-</span> <span class="fu">stata</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>( <span class="co"># Using past to inject the temp file. Normally this isn't necessary</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="st">    tabulate cyl, matcell(x)</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st">    clear</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="st">    svmat x</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="st">    '</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'save '</span>, tempfile</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">data.in =</span> mtcars,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">data.out =</span> <span class="cn">TRUE</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>. 
+.     tabulate cyl, matcell(x)
+
+        cyl |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          4 |         11       34.38       34.38
+          6 |          7       21.88       56.25
+          8 |         14       43.75      100.00
+------------+-----------------------------------
+      Total |         32      100.00
+.     clear
+.     svmat x
+number of observations will be reset to 3
+Press any key to continue, or Break to abort
+Number of observations (_N) was 0, now 3.
+.     save /var/folders/_6/rzs6b7fd09d1_4sw4vyrw8900000gs/T//Rtmp1JXCEK/file144
+&gt; d11c6609ce/stata_out.dta
+file
+    /var/folders/_6/rzs6b7fd09d1_4sw4vyrw8900000gs/T//Rtmp1JXCEK/file144d11c6
+    &gt; 609ce/stata_out.dta saved</code></pre>
+</div>
+</div>
+<p>Without the tempfile code, it would look like this.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>stata_tabulate_results <span class="ot">&lt;-</span> <span class="fu">stata</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="st">  tabulate cyl, matcell(x)</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="st">  clear</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="st">  svmat x</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="st">  save "/Users/bradcannell/Desktop/t.dta"</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="st">  '</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data.in =</span> mtcars,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">data.out =</span> <span class="cn">TRUE</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>I still have a lot to learn about saving the results from Stata commands. In the future, we may want to add notes from “/Users/bradcannell/Library/CloudStorage/Dropbox/Stata/Notes/Example Do Files/Matrix and Saved Results.do”</p>
 
 
-</section>
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -666,14 +766,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../index.html" class="pagination-link" aria-label="Introduction">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introduction</span>
+      <a href="../../chapters/packages_quick_start/packages_quick_start.html" class="pagination-link" aria-label="Packages: Quick Start">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Packages: Quick Start</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../chapters/regex/regex.html" class="pagination-link" aria-label="Regular Expressions">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Regular Expressions</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
@@ -684,7 +781,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/brad-cannell/test_quarto_book/edit/main/chapters/rstudio/rstudio.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div>
+    <div class="toc-actions"><ul><li><a href="https://github.com/brad-cannell/test_quarto_book/edit/main/chapters/stata/stata.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>
