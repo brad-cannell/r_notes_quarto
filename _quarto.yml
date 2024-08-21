@@ -90,8 +90,8 @@ book:
       #   - chapters/pdf.qmd
       
     - part: "Presenting Results"
-      # chapters: 
-      #   - chapters/pdf.qmd
+      chapters:
+        - chapters/officer/officer.qmd
       
     - part: "Collaborating"
       # chapters: 

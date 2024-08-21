@@ -1,0 +1,399 @@
+# Officer {#sec-officer}
+
+## ⭐️Overview
+
+I don't have time to do this right today, but I do make some good notes on using officer. 
+
+Good examples to check out:
+
+* LEAD panel monthly report.    
+* Sun Study report.    
+* stroke study -> table_characteristics_by_network.Rmd.    
+* L2C quarterly reports.    
+* L2C Distress Tolerance Scale Paper    
+
+At least until you figure out make files, I think the best thing to do is save tables and figures as files in the docs folder. Create a single R script to compile them all together and create the report. Use comments to specify what file the table/figure is created in.
+
+Still trying to figure out if it's better to write text in Word and then add in tables and charts with bookmarks, or is it better to write everything in R?
+
+In general, it seems helpful/expedient to do as much of the prose and formatting as possible directly in the Word template. Then, just add numbers, tables, and graphs from R with bookmarks. 
+
+::: callout-warning
+When editing the code chunks below, you will need to add "../../" in front of file paths that retrieve Word docs from or save word docs to the examples folder if you want them to work when you run them interactively. For example, "../../examples/Word Template for Officer.docx". However, you have to delete the "../../" from the file paths in order for build book to work.
+:::
+
+## 🌎Useful websites
+
+* https://stackoverflow.com/
+
+
+## 📦Load packages
+
+```{r}
+library(dplyr, warn.conflicts = FALSE)
+library(officer, warn.conflicts = FALSE)
+library(flextable, warn.conflicts = FALSE)
+```
+
+## Formatted text
+
+Can start with a template
+
+```{r}
+#| eval: false
+doc <- read_docx("officer_word_template.docx")
+```
+
+Or not
+
+```{r}
+doc <- read_docx() |>
+  body_add_par("DETECT LEAD Panel Initial Review Report", style = "heading 1") |>
+  body_add_par(paste("Updated: ", Sys.Date())) |>
+  body_add_par("") |>
+  body_add_fpar(
+    fpar(
+      ftext(
+        "Total Initial Assessments:",
+        prop = fp_text(
+          font.family = "Times New Roman", font.size = 11
+        )
+      )
+    )
+  )
+```
+
+```{r}
+print(
+  doc, 
+  "officer_formatted_text.docx"
+)
+```
+
+[Link to Word Document on Dropbox](https://www.dropbox.com/scl/fi/9gjq9soh6nwy24f1qjszj/officer_formatted_text.docx?rlkey=lilwlct5m65s1jn9h1e4lpphv&dl=0)
+
+```{r eval=FALSE}
+# Output Word document
+# Update the year and month in the file name dynamically
+print(
+  doc, 
+  paste(Sys.Date() |> format("%Y-%m"), " Initial Review Report.docx")
+)
+```
+
+## Bulleted list
+
+It's possible to do. You need to make sure you create a bullet style in the template Word doc.
+
+See here: https://github.com/davidgohel/officer/issues/262
+
+```{r eval=FALSE}
+#  Create Word doc
+ss_report <- read_docx("officer_word_template.docx") |>
+  body_add_par("Sun Study Outcomes Report", style = "heading 1") |> 
+  body_add_par("\n") |> 
+  body_add_par(paste("Updated: ", Sys.Date())) |> 
+  body_add_par("\n") |> 
+  
+  # Add bulleted list
+  body_add_par("item 1", style = "bullet") |>
+  body_add_par("item 2", style = "bullet") |>
+  body_add_par("item 3", style = "bullet")
+```
+
+```{r eval=FALSE}
+# Output Word document
+print(
+  ss_report, 
+  "officer_bullets.docx"
+)
+```
+
+[Link to Word Document on Dropbox](https://www.dropbox.com/scl/fi/5g49h2mv86xn379pbpg72/officer_bullets.docx?rlkey=hg6vdfciyaeah2a5yfeuk21v6&dl=0)
+
+## Adding on to the end of a file. 
+
+From the Sun Study. Need to clean up when I get time.
+
+Start with the same document we just made above. 
+
+```{r}
+#  Create Word doc
+ss_report_end <- read_docx("officer_word_template.docx") |>
+  body_add_par("Sun Study Outcomes Report", style = "heading 1") |> 
+  body_add_par("\n") |> 
+  body_add_par(paste("Updated: ", Sys.Date())) |> 
+  body_add_par("\n")
+```
+
+```{r}
+# Output Word document
+print(
+  ss_report_end, 
+  "officer_bullets_end.docx"
+)
+```
+
+[Link to Word Document on Dropbox](https://www.dropbox.com/scl/fi/osh5muf9zfitoua1ttzoy/officer_bullets_end.docx?rlkey=w8iscloemvydr2ik7867ie573&dl=0)
+
+Now add a new section to the document. 
+
+Section 1. Report on missing data 
+
+```{r}
+# Load report and add to the end?
+ss_report_end <- read_docx("officer_bullets_end.docx") |>
+  body_add_par("Test Text")
+```
+
+```{r}
+# Output Word document
+print(
+  ss_report_end, 
+  "officer_bullets_end.docx"
+)
+```
+
+[Link to Word Document on Dropbox](https://www.dropbox.com/scl/fi/osh5muf9zfitoua1ttzoy/officer_bullets_end.docx?rlkey=w8iscloemvydr2ik7867ie573&dl=0)
+
+This works. However, there was no advantage to doing it this way in the Sun Study example. In fact, what I've found in general is that it typically works best to do as much adding text and formatting things as possible directly in the Word template. Then, just pretty much add flextables and plots to the Word template. 
+
+## Using bookmarks
+
+Writing everything in an R script and then compiling to a Word document works alright, but wrapping everything in officer functions makes it hard to read. In this section, I'm seeing if I can type all the narrative in the Word template, then just add tables and figures into the Word template at bookmarks.
+
+Website about bookmarks: https://davidgohel.github.io/officer/reference/body_replace_text_at_bkm.html
+
+Have to create this with point and click in Word: http://howtomicrosoftofficetutorials.blogspot.com/2017/03/use-bookmarks-in-word-2016-for-mac.html
+
+Use Insert > Links > Bookmark
+
+### Replacing bookmarks with text
+
+Here, we update a "date" bookmark with today's date.
+
+```{r}
+doc_w_bookmarks <- read_docx("officer_word_template_bookmarks.docx") |> 
+  body_replace_text_at_bkm("date", as.character(Sys.Date()))
+
+print(
+  doc_w_bookmarks,
+  "officer_bookmarks.docx"
+)
+```
+
+[Link to Word Document on Dropbox](https://www.dropbox.com/scl/fi/485ebwighemgdugz8pel1/officer_bookmarks.docx?rlkey=te63ooagpv9xfj1wc3ql4fxol&dl=0)
+
+::: callout-warning
+Originally, I had the "add date" example code in this script below the "add table" and "add figure" code, and it didn't work. It didn't produce a warning either. The "date" bookmark just wasn't replaced with the date value in officer_bookmarks.docx. Moving the code chunk up to be before the table and the figure fixed the problem. I'm not sure, but we may have to replace bookmarks in the order they appear in the Word document.
+:::
+
+### Replacing bookmarks with flextables
+
+```{r}
+doc_w_bookmarks <- doc_w_bookmarks |> 
+  body_replace_flextable_at_bkm(
+    bookmark = "example_table",
+    value = flextable(head(mtcars))
+  )
+
+print(
+  doc_w_bookmarks,
+  "officer_bookmarks.docx"
+)
+```
+
+[Link to Word Document on Dropbox](https://www.dropbox.com/scl/fi/485ebwighemgdugz8pel1/officer_bookmarks.docx?rlkey=te63ooagpv9xfj1wc3ql4fxol&dl=0)
+
+::: callout-warning
+If you don't add other text around the bookmark, you will get this `error: Error: bookmark 'example_table' does not end in the same paragraph (or is on the whole paragraph)`. A hacky fix is to enclose bookmark text with `<bm> text <bm>`. Make sure only the "text" part is the bookmark.
+:::
+
+::: callout-warning
+I also found that you can't continue piping the document after you've added a flextable at a bookmark. You have to start overwriting the Word document object. See LEAD Panel Summary Report as an example. After figuring this out, I think it makes more sense to write text directly in Word and use bookmarks only to replace tables and figures in many cases.
+:::
+
+### Replacing bookmarks with images
+
+::: callout-note
+For ggplot graphs, it looks like you need to use `ggsave()` to save the plot as an image file. Then, use the image file as the value to `body_replace_img_at_bkm()`
+:::
+
+::: callout-warning
+Don't forget to use `external_img()` when replacing bookmarks with images.
+:::
+
+For images, just add the bookmark to the end of the title without surrounding it with "bm". For example, "Figure 1. Overall trend in sunscreen application outcomes by study p_overall" Where "p_overall is the bookmark. Otherwise, the "bm" will still be there.
+
+For best results, the width and height used in ggsave() should match the width and height in `external_img()`. Deciding on the correct width and height might take some trial and error.
+
+Example from L2C quarterly report: 
+
+```{r}
+doc_w_bookmarks <- doc_w_bookmarks |> 
+  body_replace_img_at_bkm(
+    "example_figure", 
+    external_img("fig_1.jpeg", width = 7, height = 4) # Don't forget to use external_img()
+  )
+
+print(
+  doc_w_bookmarks,
+  "officer_bookmarks.docx"
+)
+```
+
+[Link to Word Document on Dropbox](https://www.dropbox.com/scl/fi/485ebwighemgdugz8pel1/officer_bookmarks.docx?rlkey=te63ooagpv9xfj1wc3ql4fxol&dl=0)
+
+### Embedding cells form one table into cells of an existing Word tables at a bookmark with flextable and officer
+
+**Posting on Stack Overflow -- Update when you have a solution**
+
+In Word, it is possible to copy and paste a subsection of one table into another table. For example, if I have the two Word tables below, I can copy column 2, rows 2-5 from the first table and paste them into column 2, rows 4-7 in the second table.
+
+```{r}
+#| echo: false
+knitr::include_graphics("embedding_flextables_in_existing_word_tables_01.png")
+```
+
+I can highlight the cells that I want to copy in the first table and and paste them into the cells of the second table.
+
+```{r}
+#| echo: false
+knitr::include_graphics("embedding_flextables_in_existing_word_tables_01.gif")
+```
+
+I'm wondering if there is a programmatic way to do the same operation with `flextable` and `officer`. It's probably worth mentioning the following to parameters:  
+
+1. Creating the second table from scratch with the values from the first table included won't work for my problem -- or at least it's a solution that I'm trying to avoid.
+
+2. Add the values from the first table to the cells of the second table one at a time with bookmarks won't work for my problme -- or at least it's a solution that I'm trying to avoid. 
+
+I've tried the following potential solutions so far. They all begin with the following [template Word document](https://www.dropbox.com/s/ac06bgempt2kpzz/embedding_flextables_in_existing_word_tables.docx?dl=0) with bookmarks embedded in the table. 
+
+Additionally, here is the code I'm using to create the "First table" example data.
+
+```{r}
+first_table <- tibble(
+  n_items = 1:4,
+  n = c(100, 40, 20, 5)
+)
+```
+
+#### Method 1: Add values to a bookmark in the second table
+
+```{r}
+#| echo: false
+knitr::include_graphics("embedding_flextables_in_existing_word_tables_02.png")
+```
+
+Start by reading in the Word template document.
+
+```{r}
+#| echo: false
+#| eval: false
+#| include: false
+# This chunk is for interactive testing. It won't show up in the book.
+doc <- read_docx("embedding_flextables_in_existing_word_tables.docx")
+```
+
+Then, I tried adding the _values_ from first_table to the bookmark in the second table.
+
+```{r}
+#| error: true
+doc <- doc |> 
+  body_replace_text_at_bkm(
+    "bm_add_rows_01", 
+    first_table |> pull(n) |> as.character()
+  )
+```
+
+That code results in the following error:
+
+````
+Error in body_replace_text_at_bkm(., "bm_add_rows_01", first_table |> : 
+is_scalar_character(value) is not TRUE
+````
+
+So, I can't add a vector of values to the bookmark.
+
+#### Method 2: Add a single-column flextable to a bookmark in the second table
+
+To do this, I need to first coerce first_table into a single-column flextable object.
+
+```{r}
+#| eval: false
+first_table_ft <- first_table |> 
+  select(n) |> 
+  flextable() |> 
+  delete_part("header") |> 
+  border_remove()
+```
+
+Then, add the single-column flextable to the bookmark in the second table.
+
+```{r}
+#| eval: false
+doc <- doc |> 
+  body_replace_flextable_at_bkm("bm_add_rows_01", first_table_ft)
+```
+
+```{r}
+#| eval: false
+print(
+  doc, 
+  "embedding_flextables.docx"
+)
+```
+
+That returns the following result -- a four-row table embedded into a single cell of the second table. This result makes sense, but it isn't the result I'm attempting to achieve. 
+
+```{r}
+#| echo: false
+knitr::include_graphics("embedding_flextables_in_existing_word_tables_03.png")
+```
+
+#### Method 3: Add a single-column flextable to a bookmark in the second table with cells merged vertically
+
+For my third attempt, I tried adding the bookmark to the second table with rows 4-7 merged in column 2.
+
+```{r}
+#| echo: false
+knitr::include_graphics("embedding_flextables_in_existing_word_tables_04.png")
+```
+
+Then, adding the single-column flextable to the bookmark in the second table as before.
+
+```{r}
+#| echo: false
+#| eval: false
+doc <- doc |> 
+  body_replace_flextable_at_bkm("bm_add_rows_02", first_table_ft)
+```
+
+```{r}
+#| eval: false
+print(
+  doc, 
+  "embedding_flextables.docx"
+)
+```
+
+Which again returns a result that isn't quite what I'm looking for.
+
+```{r}
+#| echo: false
+knitr::include_graphics("embedding_flextables_in_existing_word_tables_05.png")
+```
+
+Any solutions and/or constructive feedback is appreciated!
+
+<!--
+Clean up and add session info
+-->
+
+```{r}
+#| echo: false
+rm(list = ls())
+```
+
+
