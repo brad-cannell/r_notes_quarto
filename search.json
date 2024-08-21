@@ -326,5 +326,93 @@
       "Programming",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Stata</span>"
     ]
+  },
+  {
+    "objectID": "chapters/officer/officer.html",
+    "href": "chapters/officer/officer.html",
+    "title": "6  Officer",
+    "section": "",
+    "text": "6.1 ⭐️Overview\nI don’t have time to do this right today, but I do make some good notes on using officer.\nGood examples to check out:\nAt least until you figure out make files, I think the best thing to do is save tables and figures as files in the docs folder. Create a single R script to compile them all together and create the report. Use comments to specify what file the table/figure is created in.\nStill trying to figure out if it’s better to write text in Word and then add in tables and charts with bookmarks, or is it better to write everything in R?\nIn general, it seems helpful/expedient to do as much of the prose and formatting as possible directly in the Word template. Then, just add numbers, tables, and graphs from R with bookmarks.",
+    "crumbs": [
+      "Presenting Results",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Officer</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/officer/officer.html#overview",
+    "href": "chapters/officer/officer.html#overview",
+    "title": "6  Officer",
+    "section": "",
+    "text": "LEAD panel monthly report.\n\nSun Study report.\n\nstroke study -&gt; table_characteristics_by_network.Rmd.\n\nL2C quarterly reports.\n\nL2C Distress Tolerance Scale Paper\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\nWhen editing the code chunks below, you will need to add “../../” in front of file paths that retrieve Word docs from or save word docs to the examples folder if you want them to work when you run them interactively. For example, “../../examples/Word Template for Officer.docx”. However, you have to delete the “../../” from the file paths in order for build book to work.",
+    "crumbs": [
+      "Presenting Results",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Officer</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/officer/officer.html#useful-websites",
+    "href": "chapters/officer/officer.html#useful-websites",
+    "title": "6  Officer",
+    "section": "6.2 🌎Useful websites",
+    "text": "6.2 🌎Useful websites\n\nhttps://stackoverflow.com/",
+    "crumbs": [
+      "Presenting Results",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Officer</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/officer/officer.html#load-packages",
+    "href": "chapters/officer/officer.html#load-packages",
+    "title": "6  Officer",
+    "section": "6.3 📦Load packages",
+    "text": "6.3 📦Load packages\n\nlibrary(dplyr, warn.conflicts = FALSE)\nlibrary(officer, warn.conflicts = FALSE)\nlibrary(flextable, warn.conflicts = FALSE)",
+    "crumbs": [
+      "Presenting Results",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Officer</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/officer/officer.html#formatted-text",
+    "href": "chapters/officer/officer.html#formatted-text",
+    "title": "6  Officer",
+    "section": "6.4 Formatted text",
+    "text": "6.4 Formatted text\nCan start with a template\n\ndoc &lt;- read_docx(\"officer_word_template.docx\")\n\nOr not\n\ndoc &lt;- read_docx() |&gt;\n  body_add_par(\"DETECT LEAD Panel Initial Review Report\", style = \"heading 1\") |&gt;\n  body_add_par(paste(\"Updated: \", Sys.Date())) |&gt;\n  body_add_par(\"\") |&gt;\n  body_add_fpar(\n    fpar(\n      ftext(\n        \"Total Initial Assessments:\",\n        prop = fp_text(\n          font.family = \"Times New Roman\", font.size = 11\n        )\n      )\n    )\n  )\n\n\nprint(\n  doc, \n  \"officer_formatted_text.docx\"\n)\n\nLink to Word Document on Dropbox\n\n# Output Word document\n# Update the year and month in the file name dynamically\nprint(\n  doc, \n  paste(Sys.Date() |&gt; format(\"%Y-%m\"), \" Initial Review Report.docx\")\n)",
+    "crumbs": [
+      "Presenting Results",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Officer</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/officer/officer.html#bulleted-list",
+    "href": "chapters/officer/officer.html#bulleted-list",
+    "title": "6  Officer",
+    "section": "6.5 Bulleted list",
+    "text": "6.5 Bulleted list\nIt’s possible to do. You need to make sure you create a bullet style in the template Word doc.\nSee here: https://github.com/davidgohel/officer/issues/262\n\n#  Create Word doc\nss_report &lt;- read_docx(\"officer_word_template.docx\") |&gt;\n  body_add_par(\"Sun Study Outcomes Report\", style = \"heading 1\") |&gt; \n  body_add_par(\"\\n\") |&gt; \n  body_add_par(paste(\"Updated: \", Sys.Date())) |&gt; \n  body_add_par(\"\\n\") |&gt; \n  \n  # Add bulleted list\n  body_add_par(\"item 1\", style = \"bullet\") |&gt;\n  body_add_par(\"item 2\", style = \"bullet\") |&gt;\n  body_add_par(\"item 3\", style = \"bullet\")\n\n\n# Output Word document\nprint(\n  ss_report, \n  \"officer_bullets.docx\"\n)\n\nLink to Word Document on Dropbox",
+    "crumbs": [
+      "Presenting Results",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Officer</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/officer/officer.html#adding-on-to-the-end-of-a-file.",
+    "href": "chapters/officer/officer.html#adding-on-to-the-end-of-a-file.",
+    "title": "6  Officer",
+    "section": "6.6 Adding on to the end of a file.",
+    "text": "6.6 Adding on to the end of a file.\nFrom the Sun Study. Need to clean up when I get time.\nStart with the same document we just made above.\n\n#  Create Word doc\nss_report_end &lt;- read_docx(\"officer_word_template.docx\") |&gt;\n  body_add_par(\"Sun Study Outcomes Report\", style = \"heading 1\") |&gt; \n  body_add_par(\"\\n\") |&gt; \n  body_add_par(paste(\"Updated: \", Sys.Date())) |&gt; \n  body_add_par(\"\\n\")\n\n\n# Output Word document\nprint(\n  ss_report_end, \n  \"officer_bullets_end.docx\"\n)\n\nLink to Word Document on Dropbox\nNow add a new section to the document.\nSection 1. Report on missing data\n\n# Load report and add to the end?\nss_report_end &lt;- read_docx(\"officer_bullets_end.docx\") |&gt;\n  body_add_par(\"Test Text\")\n\n\n# Output Word document\nprint(\n  ss_report_end, \n  \"officer_bullets_end.docx\"\n)\n\nLink to Word Document on Dropbox\nThis works. However, there was no advantage to doing it this way in the Sun Study example. In fact, what I’ve found in general is that it typically works best to do as much adding text and formatting things as possible directly in the Word template. Then, just pretty much add flextables and plots to the Word template.",
+    "crumbs": [
+      "Presenting Results",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Officer</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/officer/officer.html#using-bookmarks",
+    "href": "chapters/officer/officer.html#using-bookmarks",
+    "title": "6  Officer",
+    "section": "6.7 Using bookmarks",
+    "text": "6.7 Using bookmarks\nWriting everything in an R script and then compiling to a Word document works alright, but wrapping everything in officer functions makes it hard to read. In this section, I’m seeing if I can type all the narrative in the Word template, then just add tables and figures into the Word template at bookmarks.\nWebsite about bookmarks: https://davidgohel.github.io/officer/reference/body_replace_text_at_bkm.html\nHave to create this with point and click in Word: http://howtomicrosoftofficetutorials.blogspot.com/2017/03/use-bookmarks-in-word-2016-for-mac.html\nUse Insert &gt; Links &gt; Bookmark\n\n6.7.1 Replacing bookmarks with text\nHere, we update a “date” bookmark with today’s date.\n\ndoc_w_bookmarks &lt;- read_docx(\"officer_word_template_bookmarks.docx\") |&gt; \n  body_replace_text_at_bkm(\"date\", as.character(Sys.Date()))\n\nprint(\n  doc_w_bookmarks,\n  \"officer_bookmarks.docx\"\n)\n\nLink to Word Document on Dropbox\n\n\n\n\n\n\nWarning\n\n\n\nOriginally, I had the “add date” example code in this script below the “add table” and “add figure” code, and it didn’t work. It didn’t produce a warning either. The “date” bookmark just wasn’t replaced with the date value in officer_bookmarks.docx. Moving the code chunk up to be before the table and the figure fixed the problem. I’m not sure, but we may have to replace bookmarks in the order they appear in the Word document.\n\n\n\n\n6.7.2 Replacing bookmarks with flextables\n\ndoc_w_bookmarks &lt;- doc_w_bookmarks |&gt; \n  body_replace_flextable_at_bkm(\n    bookmark = \"example_table\",\n    value = flextable(head(mtcars))\n  )\n\nprint(\n  doc_w_bookmarks,\n  \"officer_bookmarks.docx\"\n)\n\nLink to Word Document on Dropbox\n\n\n\n\n\n\nWarning\n\n\n\nIf you don’t add other text around the bookmark, you will get this error: Error: bookmark 'example_table' does not end in the same paragraph (or is on the whole paragraph). A hacky fix is to enclose bookmark text with &lt;bm&gt; text &lt;bm&gt;. Make sure only the “text” part is the bookmark.\n\n\n\n\n\n\n\n\nWarning\n\n\n\nI also found that you can’t continue piping the document after you’ve added a flextable at a bookmark. You have to start overwriting the Word document object. See LEAD Panel Summary Report as an example. After figuring this out, I think it makes more sense to write text directly in Word and use bookmarks only to replace tables and figures in many cases.\n\n\n\n\n6.7.3 Replacing bookmarks with images\n\n\n\n\n\n\nNote\n\n\n\nFor ggplot graphs, it looks like you need to use ggsave() to save the plot as an image file. Then, use the image file as the value to body_replace_img_at_bkm()\n\n\n\n\n\n\n\n\nWarning\n\n\n\nDon’t forget to use external_img() when replacing bookmarks with images.\n\n\nFor images, just add the bookmark to the end of the title without surrounding it with “bm”. For example, “Figure 1. Overall trend in sunscreen application outcomes by study p_overall” Where “p_overall is the bookmark. Otherwise, the”bm” will still be there.\nFor best results, the width and height used in ggsave() should match the width and height in external_img(). Deciding on the correct width and height might take some trial and error.\nExample from L2C quarterly report:\n\ndoc_w_bookmarks &lt;- doc_w_bookmarks |&gt; \n  body_replace_img_at_bkm(\n    \"example_figure\", \n    external_img(\"fig_1.jpeg\", width = 7, height = 4) # Don't forget to use external_img()\n  )\n\nprint(\n  doc_w_bookmarks,\n  \"officer_bookmarks.docx\"\n)\n\nLink to Word Document on Dropbox\n\n\n6.7.4 Embedding cells form one table into cells of an existing Word tables at a bookmark with flextable and officer\nPosting on Stack Overflow – Update when you have a solution\nIn Word, it is possible to copy and paste a subsection of one table into another table. For example, if I have the two Word tables below, I can copy column 2, rows 2-5 from the first table and paste them into column 2, rows 4-7 in the second table.\n\n\n\n\n\n\n\n\n\nI can highlight the cells that I want to copy in the first table and and paste them into the cells of the second table.\n\n\n\n\n\n\n\n\n\nI’m wondering if there is a programmatic way to do the same operation with flextable and officer. It’s probably worth mentioning the following to parameters:\n\nCreating the second table from scratch with the values from the first table included won’t work for my problem – or at least it’s a solution that I’m trying to avoid.\nAdd the values from the first table to the cells of the second table one at a time with bookmarks won’t work for my problme – or at least it’s a solution that I’m trying to avoid.\n\nI’ve tried the following potential solutions so far. They all begin with the following template Word document with bookmarks embedded in the table.\nAdditionally, here is the code I’m using to create the “First table” example data.\n\nfirst_table &lt;- tibble(\n  n_items = 1:4,\n  n = c(100, 40, 20, 5)\n)\n\n\n6.7.4.1 Method 1: Add values to a bookmark in the second table\n\n\n\n\n\n\n\n\n\nStart by reading in the Word template document.\nThen, I tried adding the values from first_table to the bookmark in the second table.\n\ndoc &lt;- doc |&gt; \n  body_replace_text_at_bkm(\n    \"bm_add_rows_01\", \n    first_table |&gt; pull(n) |&gt; as.character()\n  )\n\nError in body_replace_text_at_bkm(doc, \"bm_add_rows_01\", as.character(pull(first_table, : is_scalar_character(value) is not TRUE\n\n\nThat code results in the following error:\nError in body_replace_text_at_bkm(., \"bm_add_rows_01\", first_table |&gt; : \nis_scalar_character(value) is not TRUE\nSo, I can’t add a vector of values to the bookmark.\n\n\n6.7.4.2 Method 2: Add a single-column flextable to a bookmark in the second table\nTo do this, I need to first coerce first_table into a single-column flextable object.\n\nfirst_table_ft &lt;- first_table |&gt; \n  select(n) |&gt; \n  flextable() |&gt; \n  delete_part(\"header\") |&gt; \n  border_remove()\n\nThen, add the single-column flextable to the bookmark in the second table.\n\ndoc &lt;- doc |&gt; \n  body_replace_flextable_at_bkm(\"bm_add_rows_01\", first_table_ft)\n\n\nprint(\n  doc, \n  \"embedding_flextables.docx\"\n)\n\nThat returns the following result – a four-row table embedded into a single cell of the second table. This result makes sense, but it isn’t the result I’m attempting to achieve.\n\n\n\n\n\n\n\n\n\n\n\n6.7.4.3 Method 3: Add a single-column flextable to a bookmark in the second table with cells merged vertically\nFor my third attempt, I tried adding the bookmark to the second table with rows 4-7 merged in column 2.\n\n\n\n\n\n\n\n\n\nThen, adding the single-column flextable to the bookmark in the second table as before.\n\nprint(\n  doc, \n  \"embedding_flextables.docx\"\n)\n\nWhich again returns a result that isn’t quite what I’m looking for.\n\n\n\n\n\n\n\n\n\nAny solutions and/or constructive feedback is appreciated!",
+    "crumbs": [
+      "Presenting Results",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Officer</span>"
+    ]
   }
 ]
