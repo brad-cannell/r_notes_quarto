@@ -1,0 +1,146 @@
+# Google Sheets {#sec-google-sheets}
+
+This note is all about importing and exporting data to/from Google Sheets. The primary motivation for me to create this note initially was a personal budget app I was working on. I knew that I wanted to use Shiny as a front end for that app, but I wasn't sure what to use a back end. Then, I came across an article by Dean Attali about (persistent data storage in Shiny apps)[https://shiny.posit.co/r/articles/build/persistent-data-storage/] that discusses using Google Sheets as a back end for Shiny apps.
+
+Some of the nice things about using Google Sheets in this way are:
+- It's relatively simple and straightforward. Many people (including me) are already comfortable with Google Sheets.
+- There's no cost involved.
+- The data tables can be viewed/edited immediately in Google Sheets. You don't need to wait until you have a front end built. I'm sure there are downsides that go along with this, but it's a nice crutch for people who are new to database development.
+
+Useful websites
+- https://googlesheets4.tidyverse.org/articles/googlesheets4.html
+- https://shiny.posit.co/r/articles/build/persistent-data-storage/gsheets
+
+## Load packages
+
+```{r}
+library(dplyr, warn.conflicts = FALSE)
+library(googlesheets4, warn.conflicts = FALSE)
+library(googledrive, warn.conflicts = FALSE)
+```
+
+## Sheet ID
+
+Save the sheet id for use below. You can pull it from the sheet's URL. For example, the sheet id for the budget app is: "1153fK76wz8cu4URFM7eidlyv8AEUoSKAAIt-q6uH0ZE". It is taken from the budget app's url, which is: "https://docs.google.com/spreadsheets/d/1153fK76wz8cu4URFM7eidlyv8AEUoSKAAIt-q6uH0ZE/edit#gid=1694905897"
+
+```{r}
+budget_app_id <- "1153fK76wz8cu4URFM7eidlyv8AEUoSKAAIt-q6uH0ZE"
+```
+
+## View Google Sheet
+
+View the Google Sheet in the browser (optional). The code below isn't run.
+
+```{r}
+#| eval: false
+
+gs4_browse(budget_app_id)
+```
+
+## Import
+
+Now, we will import a Google Sheet. 
+
+```{r}
+entities <- read_sheet(ss = budget_app_id, sheet = "Entities")
+```
+
+The first time you run this code, you will have to authorize the package to access your Google Drive.
+
+```{r}
+#| label: authorize-google
+#| echo: false
+#| fig-cap: The first time you run this code, you will have to authorize the package to access your Google Drive.
+#| fig-alt: A screenshot of the R console. The prompt is asking the user if it is ok to to cache OAuth access credentials in the folder ~/Library/Caches/gargle between R sessions.
+
+knitr::include_graphics("authorize_google.png")
+```
+
+Next, you will have to select the Google account you want to give the Tidyverse API Packages authorization to access. Then, you will need to make sure to click the checkbox that gives the Tidyverse API Packages authorization to "see, edit, create, and delete all your Google Sheets spreadsheets."
+
+```{r}
+#| label: authorize-checkbox
+#| echo: false
+#| fig-cap: Click the checkbox that gives the Tidyverse API Packages authorization to "see, edit, create, and delete all your Google Sheets spreadsheets."
+#| fig-alt: A screenshot of the checkbox that gives the Tidyverse API Packages authorization to "see, edit, create, and delete all your Google Sheets spreadsheets."
+
+knitr::include_graphics("authorize_checkbox.png")
+```
+
+::: callout-warning
+MAKE SURE TO CLICK THE CHECKBOX. Don't just hit continue.
+:::
+
+After clicking the checkbox, click `Continue`. After doing so, you should be able to close the browser window and run the code without issue. If there is an issue, try restarting the R session and going through the authorization process again.
+
+Alternatively, we can use the `googledrive` package and the sheet's name to import the sheet into our R session.
+
+```{r}
+entities <- drive_get("Budget App Prototype") |>
+  read_sheet("Entities")
+```
+
+::: callout-note
+The first time you use the `googledrive` package, you will have to go through the authorization process described above.
+:::
+
+## Metadata 
+
+It is also possible to optionally view metadata about the sheet.
+
+```{r}
+gs4_get(budget_app_id)
+```
+
+## Properties
+
+It is also possible to optionally view properties of the sheet.
+
+```{r}
+sheet_properties(budget_app_id)
+```
+
+## Add data to sheets
+
+In the example below, we will add new data to the `entities` sheet.
+
+### Method 1: Add data locally and then write to Google Sheets
+
+```{r}
+entities_update <- entities |>
+  add_row(pk_entity = 999, entity_name = "Test")
+```
+
+Now, write the updates back to Google Sheets.
+
+```{r}
+sheet_write(entities_update, budget_app_id, sheet = "Test")
+```
+
+It worked. Now, delete the test sheet.
+
+```{r}
+sheet_delete(budget_app_id, "Test")
+```
+
+### Method 2: Add directly to Google Sheets (almost like a database)
+
+```{r}
+entities_empty <- slice(entities, 0)
+entities_update <- entities_empty |>
+  add_row(pk_entity = 999, entity_name = "Test")
+```
+
+Append to Google Sheet
+
+```{r}
+sheet_append(budget_app_id, entities_update, sheet = "Entities")
+```
+
+It worked! Now, delete the test row.
+
+```{r}
+range_delete(budget_app_id, sheet = "Entities", range = "30", shift = NULL)
+```
+
+One thing I think I like about this method is that I can read/write data to/from R/Shiny, but I can also still easily interact with the data directly in Google Sheets.

@@ -74,8 +74,8 @@ book:
       #   - chapters/call_out_boxes.qmd
         
     - part: "Working with External Files"
-      # chapters: 
-      #   - chapters/code_chunks.qmd
+      chapters:
+        - chapters/google_sheets/google_sheets.qmd
         
     - part: "Data Management"
       # chapters: 
