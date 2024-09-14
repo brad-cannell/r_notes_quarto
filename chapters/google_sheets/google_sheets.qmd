@@ -1,15 +1,16 @@
 # Google Sheets {#sec-google-sheets}
 
-This note is all about importing and exporting data to/from Google Sheets. The primary motivation for me to create this note initially was a personal budget app I was working on. I knew that I wanted to use Shiny as a front end for that app, but I wasn't sure what to use a back end. Then, I came across an article by Dean Attali about (persistent data storage in Shiny apps)[https://shiny.posit.co/r/articles/build/persistent-data-storage/] that discusses using Google Sheets as a back end for Shiny apps.
+This note is all about importing and exporting data to/from Google Sheets. The primary motivation for me to create this note initially was a personal budget app I was working on. I knew that I wanted to use Shiny as a front end for that app, but I wasn't sure what to use a back end. Then, I came across an article by Dean Attali about [persistent data storage in Shiny apps](https://shiny.posit.co/r/articles/build/persistent-data-storage/) that discusses using Google Sheets as a back end for Shiny apps.
 
-Some of the nice things about using Google Sheets in this way are:
-- It's relatively simple and straightforward. Many people (including me) are already comfortable with Google Sheets.
-- There's no cost involved.
-- The data tables can be viewed/edited immediately in Google Sheets. You don't need to wait until you have a front end built. I'm sure there are downsides that go along with this, but it's a nice crutch for people who are new to database development.
+Some of the nice things about using Google Sheets in this way are: - It's relatively simple and straightforward. Many people (including me) are already comfortable with Google Sheets. - There's no cost involved. - The data tables can be viewed/edited immediately in Google Sheets. You don't need to wait until you have a front end built. I'm sure there are downsides that go along with this, but it's a nice crutch for people who are new to database development.
 
-Useful websites
-- https://googlesheets4.tidyverse.org/articles/googlesheets4.html
-- https://shiny.posit.co/r/articles/build/persistent-data-storage/gsheets
+Useful websites:
+
+-   [Get started with googlesheets4](https://googlesheets4.tidyverse.org/articles/googlesheets4.html)
+
+-   [Persistent data storage in Shiny apps - Google Sheets](https://shiny.posit.co/r/articles/build/persistent-data-storage/#gsheets)
+
+-   [Dean Attali's Persistent data storage Shiny app](https://attalitech.com/#portfolio)
 
 ## Load packages
 
@@ -21,7 +22,7 @@ library(googledrive, warn.conflicts = FALSE)
 
 ## Sheet ID
 
-Save the sheet id for use below. You can pull it from the sheet's URL. For example, the sheet id for the budget app is: "1153fK76wz8cu4URFM7eidlyv8AEUoSKAAIt-q6uH0ZE". It is taken from the budget app's url, which is: "https://docs.google.com/spreadsheets/d/1153fK76wz8cu4URFM7eidlyv8AEUoSKAAIt-q6uH0ZE/edit#gid=1694905897"
+Save the sheet id for use below. You can pull it from the sheet's URL. For example, the sheet id for the budget app is: `1153fK76wz8cu4URFM7eidlyv8AEUoSKAAIt-q6uH0ZE`. It is taken from the budget app's url, which is: `https://docs.google.com/spreadsheets/d/1153fK76wz8cu4URFM7eidlyv8AEUoSKAAIt-q6uH0ZE/edit#gid=1694905897`
 
 ```{r}
 budget_app_id <- "1153fK76wz8cu4URFM7eidlyv8AEUoSKAAIt-q6uH0ZE"
@@ -39,7 +40,7 @@ gs4_browse(budget_app_id)
 
 ## Import
 
-Now, we will import a Google Sheet. 
+Now, we will import a Google Sheet.
 
 ```{r}
 entities <- read_sheet(ss = budget_app_id, sheet = "Entities")
@@ -84,7 +85,7 @@ entities <- drive_get("Budget App Prototype") |>
 The first time you use the `googledrive` package, you will have to go through the authorization process described above.
 :::
 
-## Metadata 
+## Metadata
 
 It is also possible to optionally view metadata about the sheet.
 
@@ -102,7 +103,7 @@ sheet_properties(budget_app_id)
 
 ## Add data to sheets
 
-In the example below, we will add new data to the `entities` sheet.
+In the example below, we will add new data to the **entities** sheet.
 
 ### Method 1: Add data locally and then write to Google Sheets
 
