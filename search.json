@@ -343,7 +343,7 @@
     "href": "chapters/google_sheets/google_sheets.html#sheet-id",
     "title": "6  Google Sheets",
     "section": "6.2 Sheet ID",
-    "text": "6.2 Sheet ID\nSave the sheet id for use below. You can pull it from the sheet’s URL. For example, the sheet id for the budget app is: “1153fK76wz8cu4URFM7eidlyv8AEUoSKAAIt-q6uH0ZE”. It is taken from the budget app’s url, which is: “https://docs.google.com/spreadsheets/d/1153fK76wz8cu4URFM7eidlyv8AEUoSKAAIt-q6uH0ZE/edit#gid=1694905897”\n\nbudget_app_id &lt;- \"1153fK76wz8cu4URFM7eidlyv8AEUoSKAAIt-q6uH0ZE\"",
+    "text": "6.2 Sheet ID\nSave the sheet id for use below. You can pull it from the sheet’s URL. For example, the sheet id for the budget app is: 1153fK76wz8cu4URFM7eidlyv8AEUoSKAAIt-q6uH0ZE. It is taken from the budget app’s url, which is: https://docs.google.com/spreadsheets/d/1153fK76wz8cu4URFM7eidlyv8AEUoSKAAIt-q6uH0ZE/edit#gid=1694905897\n\nbudget_app_id &lt;- \"1153fK76wz8cu4URFM7eidlyv8AEUoSKAAIt-q6uH0ZE\"",
     "crumbs": [
       "Working with External Files",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Google Sheets</span>"

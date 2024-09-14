@@ -291,9 +291,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>This note is all about importing and exporting data to/from Google Sheets. The primary motivation for me to create this note initially was a personal budget app I was working on. I knew that I wanted to use Shiny as a front end for that app, but I wasn’t sure what to use a back end. Then, I came across an article by Dean Attali about (persistent data storage in Shiny apps)[https://shiny.posit.co/r/articles/build/persistent-data-storage/] that discusses using Google Sheets as a back end for Shiny apps.</p>
+<p>This note is all about importing and exporting data to/from Google Sheets. The primary motivation for me to create this note initially was a personal budget app I was working on. I knew that I wanted to use Shiny as a front end for that app, but I wasn’t sure what to use a back end. Then, I came across an article by Dean Attali about <a href="https://shiny.posit.co/r/articles/build/persistent-data-storage/">persistent data storage in Shiny apps</a> that discusses using Google Sheets as a back end for Shiny apps.</p>
 <p>Some of the nice things about using Google Sheets in this way are: - It’s relatively simple and straightforward. Many people (including me) are already comfortable with Google Sheets. - There’s no cost involved. - The data tables can be viewed/edited immediately in Google Sheets. You don’t need to wait until you have a front end built. I’m sure there are downsides that go along with this, but it’s a nice crutch for people who are new to database development.</p>
-<p>Useful websites - https://googlesheets4.tidyverse.org/articles/googlesheets4.html - https://shiny.posit.co/r/articles/build/persistent-data-storage/gsheets</p>
+<p>Useful websites:</p>
+<ul>
+<li><p><a href="https://googlesheets4.tidyverse.org/articles/googlesheets4.html">Get started with googlesheets4</a></p></li>
+<li><p><a href="https://shiny.posit.co/r/articles/build/persistent-data-storage/#gsheets">Persistent data storage in Shiny apps - Google Sheets</a></p></li>
+<li><p><a href="https://attalitech.com/#portfolio">Dean Attali’s Persistent data storage Shiny app</a></p></li>
+</ul>
 <section id="load-packages" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="load-packages"><span class="header-section-number">6.1</span> Load packages</h2>
 <div class="cell">
@@ -304,7 +309,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="sheet-id" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="sheet-id"><span class="header-section-number">6.2</span> Sheet ID</h2>
-<p>Save the sheet id for use below. You can pull it from the sheet’s URL. For example, the sheet id for the budget app is: “1153fK76wz8cu4URFM7eidlyv8AEUoSKAAIt-q6uH0ZE”. It is taken from the budget app’s url, which is: “https://docs.google.com/spreadsheets/d/1153fK76wz8cu4URFM7eidlyv8AEUoSKAAIt-q6uH0ZE/edit#gid=1694905897”</p>
+<p>Save the sheet id for use below. You can pull it from the sheet’s URL. For example, the sheet id for the budget app is: <code>1153fK76wz8cu4URFM7eidlyv8AEUoSKAAIt-q6uH0ZE</code>. It is taken from the budget app’s url, which is: <code>https://docs.google.com/spreadsheets/d/1153fK76wz8cu4URFM7eidlyv8AEUoSKAAIt-q6uH0ZE/edit#gid=1694905897</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>budget_app_id <span class="ot">&lt;-</span> <span class="st">"1153fK76wz8cu4URFM7eidlyv8AEUoSKAAIt-q6uH0ZE"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -514,7 +519,7 @@ Note
 </section>
 <section id="add-data-to-sheets" class="level2" data-number="6.7">
 <h2 data-number="6.7" class="anchored" data-anchor-id="add-data-to-sheets"><span class="header-section-number">6.7</span> Add data to sheets</h2>
-<p>In the example below, we will add new data to the <code>entities</code> sheet.</p>
+<p>In the example below, we will add new data to the <strong>entities</strong> sheet.</p>
 <section id="method-1-add-data-locally-and-then-write-to-google-sheets" class="level3" data-number="6.7.1">
 <h3 data-number="6.7.1" class="anchored" data-anchor-id="method-1-add-data-locally-and-then-write-to-google-sheets"><span class="header-section-number">6.7.1</span> Method 1: Add data locally and then write to Google Sheets</h3>
 <div class="cell">
