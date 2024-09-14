@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R Notes - 3&nbsp; Programming with functions</title>
+<title>R Notes - 6&nbsp; Google Sheets</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../chapters/packages_quick_start/packages_quick_start.html" rel="next">
-<link href="../../chapters/regex/regex.html" rel="prev">
+<link href="../../chapters/officer/officer.html" rel="next">
+<link href="../../chapters/stata/stata.html" rel="prev">
 <link href="../../cover.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -116,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/rstudio/rstudio.html">Programming</a></li><li class="breadcrumb-item"><a href="../../chapters/programming_with_functions/programming_with_functions.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programming with functions</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/google_sheets/google_sheets.html">Working with External Files</a></li><li class="breadcrumb-item"><a href="../../chapters/google_sheets/google_sheets.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Google Sheets</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -173,7 +173,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/programming_with_functions/programming_with_functions.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../chapters/programming_with_functions/programming_with_functions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programming with functions</span></span></a>
   </div>
 </li>
@@ -206,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/google_sheets/google_sheets.html" class="sidebar-item-text sidebar-link">
+  <a href="../../chapters/google_sheets/google_sheets.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Google Sheets</span></span></a>
   </div>
 </li>
@@ -255,20 +255,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">3.1</span> ⭐️ Overview</a></li>
-  <li><a href="#useful-websites" id="toc-useful-websites" class="nav-link" data-scroll-target="#useful-websites"><span class="header-section-number">3.2</span> 🌎 Useful websites</a></li>
-  <li><a href="#load-packages" id="toc-load-packages" class="nav-link" data-scroll-target="#load-packages"><span class="header-section-number">3.3</span> 📦 Load packages</a></li>
-  <li><a href="#simulate-data" id="toc-simulate-data" class="nav-link" data-scroll-target="#simulate-data"><span class="header-section-number">3.4</span> 🔢 Simulate data</a></li>
-  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples"><span class="header-section-number">3.5</span> Examples</a></li>
+  <li><a href="#load-packages" id="toc-load-packages" class="nav-link active" data-scroll-target="#load-packages"><span class="header-section-number">6.1</span> Load packages</a></li>
+  <li><a href="#sheet-id" id="toc-sheet-id" class="nav-link" data-scroll-target="#sheet-id"><span class="header-section-number">6.2</span> Sheet ID</a></li>
+  <li><a href="#view-google-sheet" id="toc-view-google-sheet" class="nav-link" data-scroll-target="#view-google-sheet"><span class="header-section-number">6.3</span> View Google Sheet</a></li>
+  <li><a href="#import" id="toc-import" class="nav-link" data-scroll-target="#import"><span class="header-section-number">6.4</span> Import</a></li>
+  <li><a href="#metadata" id="toc-metadata" class="nav-link" data-scroll-target="#metadata"><span class="header-section-number">6.5</span> Metadata</a></li>
+  <li><a href="#properties" id="toc-properties" class="nav-link" data-scroll-target="#properties"><span class="header-section-number">6.6</span> Properties</a></li>
+  <li><a href="#add-data-to-sheets" id="toc-add-data-to-sheets" class="nav-link" data-scroll-target="#add-data-to-sheets"><span class="header-section-number">6.7</span> Add data to sheets</a>
+  <ul class="collapse">
+  <li><a href="#method-1-add-data-locally-and-then-write-to-google-sheets" id="toc-method-1-add-data-locally-and-then-write-to-google-sheets" class="nav-link" data-scroll-target="#method-1-add-data-locally-and-then-write-to-google-sheets"><span class="header-section-number">6.7.1</span> Method 1: Add data locally and then write to Google Sheets</a></li>
+  <li><a href="#method-2-add-directly-to-google-sheets-almost-like-a-database" id="toc-method-2-add-directly-to-google-sheets-almost-like-a-database" class="nav-link" data-scroll-target="#method-2-add-directly-to-google-sheets-almost-like-a-database"><span class="header-section-number">6.7.2</span> Method 2: Add directly to Google Sheets (almost like a database)</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/brad-cannell/test_quarto_book/edit/main/chapters/programming_with_functions/programming_with_functions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/brad-cannell/test_quarto_book/edit/main/chapters/google_sheets/google_sheets.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/rstudio/rstudio.html">Programming</a></li><li class="breadcrumb-item"><a href="../../chapters/programming_with_functions/programming_with_functions.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programming with functions</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/google_sheets/google_sheets.html">Working with External Files</a></li><li class="breadcrumb-item"><a href="../../chapters/google_sheets/google_sheets.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Google Sheets</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-programming-with-functions" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programming with functions</span></span></h1>
+<h1 class="title"><span id="sec-google-sheets" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Google Sheets</span></span></h1>
 </div>
 
 
@@ -285,115 +291,288 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p>This note is all about importing and exporting data to/from Google Sheets. The primary motivation for me to create this note initially was a personal budget app I was working on. I knew that I wanted to use Shiny as a front end for that app, but I wasn’t sure what to use a back end. Then, I came across an article by Dean Attali about (persistent data storage in Shiny apps)[https://shiny.posit.co/r/articles/build/persistent-data-storage/] that discusses using Google Sheets as a back end for Shiny apps.</p>
+<p>Some of the nice things about using Google Sheets in this way are: - It’s relatively simple and straightforward. Many people (including me) are already comfortable with Google Sheets. - There’s no cost involved. - The data tables can be viewed/edited immediately in Google Sheets. You don’t need to wait until you have a front end built. I’m sure there are downsides that go along with this, but it’s a nice crutch for people who are new to database development.</p>
+<p>Useful websites - https://googlesheets4.tidyverse.org/articles/googlesheets4.html - https://shiny.posit.co/r/articles/build/persistent-data-storage/gsheets</p>
+<section id="load-packages" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="load-packages"><span class="header-section-number">6.1</span> Load packages</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr, <span class="at">warn.conflicts =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(googlesheets4, <span class="at">warn.conflicts =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(googledrive, <span class="at">warn.conflicts =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="sheet-id" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="sheet-id"><span class="header-section-number">6.2</span> Sheet ID</h2>
+<p>Save the sheet id for use below. You can pull it from the sheet’s URL. For example, the sheet id for the budget app is: “1153fK76wz8cu4URFM7eidlyv8AEUoSKAAIt-q6uH0ZE”. It is taken from the budget app’s url, which is: “https://docs.google.com/spreadsheets/d/1153fK76wz8cu4URFM7eidlyv8AEUoSKAAIt-q6uH0ZE/edit#gid=1694905897”</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>budget_app_id <span class="ot">&lt;-</span> <span class="st">"1153fK76wz8cu4URFM7eidlyv8AEUoSKAAIt-q6uH0ZE"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="view-google-sheet" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="view-google-sheet"><span class="header-section-number">6.3</span> View Google Sheet</h2>
+<p>View the Google Sheet in the browser (optional). The code below isn’t run.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gs4_browse</span>(budget_app_id)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="import" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="import"><span class="header-section-number">6.4</span> Import</h2>
+<p>Now, we will import a Google Sheet.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>entities <span class="ot">&lt;-</span> <span class="fu">read_sheet</span>(<span class="at">ss =</span> budget_app_id, <span class="at">sheet =</span> <span class="st">"Entities"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>! Using an auto-discovered, cached token.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>  To suppress this message, modify your code or options to clearly consent to
+  the use of a cached token.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>  See gargle's "Non-interactive auth" vignette for more details:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>  &lt;https://gargle.r-lib.org/articles/non-interactive-auth.html&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ The googlesheets4 package is using a cached token for
+  'brad.cannell@gmail.com'.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ Reading from "Budget App Prototype".</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ Range ''Entities''.</code></pre>
+</div>
+</div>
+<p>The first time you run this code, you will have to authorize the package to access your Google Drive.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://picsum.photos/200/300.png" class="img-fluid figure-img"></p>
+<p><img src="authorize_google.png" class="img-fluid figure-img" alt="A screenshot of the R console. The prompt is asking the user if it is ok to to cache OAuth access credentials in the folder ~/Library/Caches/gargle between R sessions."></p>
+<figcaption>The first time you run this code, you will have to authorize the package to access your Google Drive.</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<section id="overview" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">3.1</span> ⭐️ Overview</h2>
-<p>The basic question I asked while developing <code>tabler</code> was how do you pass a function as an argument to another function.</p>
-<p>This chapter still needs a lot of work.</p>
+<p>Next, you will have to select the Google account you want to give the Tidyverse API Packages authorization to access. Then, you will need to make sure to click the checkbox that gives the Tidyverse API Packages authorization to “see, edit, create, and delete all your Google Sheets spreadsheets.”</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="authorize_checkbox.png" class="img-fluid figure-img" alt="A screenshot of the checkbox that gives the Tidyverse API Packages authorization to &quot;see, edit, create, and delete all your Google Sheets spreadsheets.&quot;"></p>
+<figcaption>Click the checkbox that gives the Tidyverse API Packages authorization to “see, edit, create, and delete all your Google Sheets spreadsheets.”</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>MAKE SURE TO CLICK THE CHECKBOX. Don’t just hit continue.</p>
+</div>
+</div>
+<p>After clicking the checkbox, click <code>Continue</code>. After doing so, you should be able to close the browser window and run the code without issue. If there is an issue, try restarting the R session and going through the authorization process again.</p>
+<p>Alternatively, we can use the <code>googledrive</code> package and the sheet’s name to import the sheet into our R session.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>entities <span class="ot">&lt;-</span> <span class="fu">drive_get</span>(<span class="st">"Budget App Prototype"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_sheet</span>(<span class="st">"Entities"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>! Using an auto-discovered, cached token.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>  To suppress this message, modify your code or options to clearly consent to
+  the use of a cached token.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>  See gargle's "Non-interactive auth" vignette for more details:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>  &lt;https://gargle.r-lib.org/articles/non-interactive-auth.html&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ The googledrive package is using a cached token for 'brad.cannell@gmail.com'.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ The input `path` resolved to exactly 1 file.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ Reading from "Budget App Prototype".</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ Range ''Entities''.</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The first time you use the <code>googledrive</code> package, you will have to go through the authorization process described above.</p>
+</div>
+</div>
 </section>
-<section id="useful-websites" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="useful-websites"><span class="header-section-number">3.2</span> 🌎 Useful websites</h2>
-<ul>
-<li><a href="http://adv-r.had.co.nz/Functionals.html">Advanced R: Functionals</a></li>
-</ul>
+<section id="metadata" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="metadata"><span class="header-section-number">6.5</span> Metadata</h2>
+<p>It is also possible to optionally view metadata about the sheet.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gs4_get</span>(budget_app_id)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+── &lt;googlesheets4_spreadsheet&gt; ─────────────────────────────────────────────────
+ Spreadsheet name: "Budget App Prototype"                      
+               ID: 1153fK76wz8cu4URFM7eidlyv8AEUoSKAAIt-q6uH0ZE
+           Locale: en_US                                       
+        Time zone: America/Mexico_City                         
+      # of sheets: 13                                          
+# of named ranges: 26                                          
+
+── &lt;sheets&gt; ────────────────────────────────────────────────────────────────────
+        (Sheet name): (Nominal extent in rows x columns)
+ 'Development NOTES': 992 x 2
+'Dev Test Functions': 50507 x 26
+             'Lists': 1007 x 27
+     'Dev Bills Due': 1007 x 28
+              'Owed': 1000 x 26
+            'Income': 1000 x 26
+          'Entities': 1000 x 26
+          'Accounts': 50522 x 32
+    'PaymentPeriods': 1000 x 27
+     'InterestRates': 1000 x 27
+   'PaymentAccounts': 1000 x 27
+    'PaymentMethods': 1000 x 27
+     'USAA Checking': 1000 x 26
+
+── &lt;named ranges&gt; ──────────────────────────────────────────────────────────────
+                 (Named range): (A1 range)       
+          'account_categories': 'Lists'!D10:D34  
+'account_subcat_personal_care': 'Lists'!D145:D147
+   'account_pay_period_manual': 'Lists'!E10:E13  
+       'account_subcat_travel': 'Lists'!D188:D191
+               'account_types': 'Lists'!C10:C11  
+          'account_subcat_edu': 'Lists'!D55:D57  
+          'account_subcat_ent': 'Lists'!D59:D64  
+     'account_subcat_transfer': 'Lists'!D186:D186
+         'account_subcat_food': 'Lists'!D76:D80  
+        'account_subcat_bills': 'Lists'!D47:D51  
+        'account_subcat_gifts': 'Lists'!D82:D83  
+         'account_subcat_auto': 'Lists'!D38:D45  
+    'account_subcat_financial': 'Lists'!D73:D74  
+         'account_subcat_pets': 'Lists'!D164:D167
+         'account_subcat_home': 'Lists'!D94:D102 
+        'account_subcat_taxes': 'Lists'!D177:D184
+  'account_subcat_investments': 'Lists'!D104:D131
+          'account_cat_health': 'Lists'!D85:D92  
+                'entity_types': 'Lists'!B10:B15  
+       'account_subcat_income': 'Lists'!D149:D162
+     'account_subcat_shopping': 'Lists'!D169:D173
+        'account_subcat_loans': 'Lists'!D139:D143
+         'account_subcat_kids': 'Lists'!D133:D137
+         'account_subcat_fees': 'Lists'!D66:D71  
+                      'months': 'Lists'!A10:A21  
+'account_subcat_subscriptions': 'Lists'!D175:D175</code></pre>
+</div>
+</div>
 </section>
-<section id="load-packages" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="load-packages"><span class="header-section-number">3.3</span> 📦 Load packages</h2>
+<section id="properties" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="properties"><span class="header-section-number">6.6</span> Properties</h2>
+<p>It is also possible to optionally view properties of the sheet.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr, <span class="at">warn.conflicts =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sheet_properties</span>(budget_app_id)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 13 × 8
+   name               index       id type  visible grid_rows grid_columns data  
+   &lt;chr&gt;              &lt;int&gt;    &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;
+ 1 Development NOTES      0   1.38e8 GRID  TRUE          992            2 &lt;NULL&gt;
+ 2 Dev Test Functions     1   1.64e9 GRID  TRUE        50507           26 &lt;NULL&gt;
+ 3 Lists                  2   3.79e7 GRID  TRUE         1007           27 &lt;NULL&gt;
+ 4 Dev Bills Due          3   1.70e9 GRID  TRUE         1007           28 &lt;NULL&gt;
+ 5 Owed                   4   6.85e8 GRID  TRUE         1000           26 &lt;NULL&gt;
+ 6 Income                 5   9.24e8 GRID  TRUE         1000           26 &lt;NULL&gt;
+ 7 Entities               6   1.25e8 GRID  TRUE         1000           26 &lt;NULL&gt;
+ 8 Accounts               7   1.69e9 GRID  TRUE        50522           32 &lt;NULL&gt;
+ 9 PaymentPeriods         8   1.37e9 GRID  TRUE         1000           27 &lt;NULL&gt;
+10 InterestRates          9   1.04e9 GRID  TRUE         1000           27 &lt;NULL&gt;
+11 PaymentAccounts       10   1.27e9 GRID  TRUE         1000           27 &lt;NULL&gt;
+12 PaymentMethods        11   2.40e8 GRID  TRUE         1000           27 &lt;NULL&gt;
+13 USAA Checking         12   7.69e7 GRID  TRUE         1000           26 &lt;NULL&gt;</code></pre>
+</div>
 </div>
 </section>
-<section id="simulate-data" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="simulate-data"><span class="header-section-number">3.4</span> 🔢 Simulate data</h2>
-<p>Here we simulate a small data set that is intended to be representative of data from a research study.</p>
+<section id="add-data-to-sheets" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="add-data-to-sheets"><span class="header-section-number">6.7</span> Add data to sheets</h2>
+<p>In the example below, we will add new data to the <code>entities</code> sheet.</p>
+<section id="method-1-add-data-locally-and-then-write-to-google-sheets" class="level3" data-number="6.7.1">
+<h3 data-number="6.7.1" class="anchored" data-anchor-id="method-1-add-data-locally-and-then-write-to-google-sheets"><span class="header-section-number">6.7.1</span> Method 1: Add data locally and then write to Google Sheets</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>study <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id     =</span> <span class="fu">as.character</span>(<span class="fu">seq</span>(<span class="dv">1001</span>, <span class="dv">1020</span>, <span class="dv">1</span>)),</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sex    =</span> <span class="fu">factor</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>), <span class="dv">20</span>, <span class="cn">TRUE</span>)),</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">date   =</span> <span class="fu">sample</span>(<span class="fu">seq.Date</span>(<span class="fu">as.Date</span>(<span class="st">"2021-09-15"</span>), <span class="fu">as.Date</span>(<span class="st">"2021-10-26"</span>), <span class="st">"day"</span>), <span class="dv">20</span>, <span class="cn">TRUE</span>),</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">days   =</span> <span class="fu">sample</span>(<span class="dv">1</span>L<span class="sc">:</span><span class="dv">21</span>L, <span class="dv">20</span>L, <span class="cn">TRUE</span>),</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">height =</span> <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="dv">71</span>, <span class="dv">10</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Add missing values for testing</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>study<span class="sc">$</span>id[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>study<span class="sc">$</span>sex[<span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>study<span class="sc">$</span>date[<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>study<span class="sc">$</span>days[<span class="dv">6</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>study<span class="sc">$</span>height[<span class="dv">7</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>entities_update <span class="ot">&lt;-</span> entities <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">pk_entity =</span> <span class="dv">999</span>, <span class="at">entity_name =</span> <span class="st">"Test"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, write the updates back to Google Sheets.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sheet_write</span>(entities_update, budget_app_id, <span class="at">sheet =</span> <span class="st">"Test"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ Writing to "Budget App Prototype".</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ Writing to sheet 'Test'.</code></pre>
+</div>
+</div>
+<p>It worked. Now, delete the test sheet.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sheet_delete</span>(budget_app_id, <span class="st">"Test"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ Deleting 1 sheet from "Budget App Prototype":</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>• 'Test'</code></pre>
+</div>
 </div>
 </section>
-<section id="examples" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="examples"><span class="header-section-number">3.5</span> Examples</h2>
-<p>This needs to be cleaned up. I’m just in a rush.</p>
+<section id="method-2-add-directly-to-google-sheets-almost-like-a-database" class="level3" data-number="6.7.2">
+<h3 data-number="6.7.2" class="anchored" data-anchor-id="method-2-add-directly-to-google-sheets-almost-like-a-database"><span class="header-section-number">6.7.2</span> Method 2: Add directly to Google Sheets (almost like a database)</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function passed to a function?</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fn_number <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  x</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">fn_number</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3</code></pre>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>entities_empty <span class="ot">&lt;-</span> <span class="fu">slice</span>(entities, <span class="dv">0</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>entities_update <span class="ot">&lt;-</span> entities_empty <span class="sc">|&gt;</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">pk_entity =</span> <span class="dv">999</span>, <span class="at">entity_name =</span> <span class="st">"Test"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fn_sum <span class="ot">&lt;-</span> <span class="cf">function</span>(n, fn) {</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span> <span class="sc">+</span> <span class="fu">fn</span>(n)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">fn_sum</span>(<span class="dv">3</span>, fn_number)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
-</div>
-</div>
+<p>Append to Google Sheet</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>lapply2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, f, ...) {</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">"list"</span>, <span class="fu">length</span>(x))</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(x)) {</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    out[[i]] <span class="ot">&lt;-</span> <span class="fu">f</span>(x[[i]], ...)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  out</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply2</span>(<span class="fu">select</span>(study, days, height), mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[1]]
-[1] NA
-
-[[2]]
-[1] NA</code></pre>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sheet_append</span>(budget_app_id, entities_update, <span class="at">sheet =</span> <span class="st">"Entities"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ Writing to "Budget App Prototype".</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ Appending 1 row to 'Entities'.</code></pre>
 </div>
 </div>
+<p>It worked! Now, delete the test row.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply2</span>(<span class="fu">select</span>(study, days, height), mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[1]]
-[1] 12.05263
-
-[[2]]
-[1] 72.33294</code></pre>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range_delete</span>(budget_app_id, <span class="at">sheet =</span> <span class="st">"Entities"</span>, <span class="at">range =</span> <span class="st">"30"</span>, <span class="at">shift =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ Editing "Budget App Prototype".</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ Deleting cells in sheet 'Entities'.</code></pre>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How do I make this work like purrr, dplyr, etc.</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply2</span>(<span class="fu">select</span>(study, days, height), <span class="sc">~</span> <span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in f(x[[i]], ...): could not find function "f"</code></pre>
-</div>
-</div>
-<!--
-Clean up and add session info
--->
+<p>One thing I think I like about this method is that I can read/write data to/from R/Shiny, but I can also still easily interact with the data directly in Google Sheets.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -808,13 +987,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../chapters/regex/regex.html" class="pagination-link" aria-label="Regular Expressions">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Regular Expressions</span></span>
+      <a href="../../chapters/stata/stata.html" class="pagination-link" aria-label="Stata">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Stata</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../chapters/packages_quick_start/packages_quick_start.html" class="pagination-link" aria-label="Packages: Quick Start">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Packages: Quick Start</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../chapters/officer/officer.html" class="pagination-link" aria-label="Officer">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Officer</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -826,7 +1005,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/brad-cannell/test_quarto_book/edit/main/chapters/programming_with_functions/programming_with_functions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/brad-cannell/test_quarto_book/edit/main/chapters/google_sheets/google_sheets.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>
