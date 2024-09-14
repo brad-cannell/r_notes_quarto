@@ -2,7 +2,13 @@
 
 This note is all about importing and exporting data to/from Google Sheets. The primary motivation for me to create this note initially was a personal budget app I was working on. I knew that I wanted to use Shiny as a front end for that app, but I wasn't sure what to use a back end. Then, I came across an article by Dean Attali about [persistent data storage in Shiny apps](https://shiny.posit.co/r/articles/build/persistent-data-storage/) that discusses using Google Sheets as a back end for Shiny apps.
 
-Some of the nice things about using Google Sheets in this way are: - It's relatively simple and straightforward. Many people (including me) are already comfortable with Google Sheets. - There's no cost involved. - The data tables can be viewed/edited immediately in Google Sheets. You don't need to wait until you have a front end built. I'm sure there are downsides that go along with this, but it's a nice crutch for people who are new to database development.
+Some of the nice things about using Google Sheets in this way are:
+
+-   It's relatively simple and straightforward. Many people (including me) are already comfortable with Google Sheets.
+
+-   There's no cost involved.
+
+-   The data tables can be viewed/edited immediately in Google Sheets. You don't need to wait until you have a front end built. I'm sure there are downsides that go along with this, but it's a nice crutch for people who are new to database development.
 
 Useful websites:
 
