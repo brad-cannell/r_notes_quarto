@@ -1,0 +1,78 @@
+# Creating Templates {#sec-creating-templates}
+
+## Overview
+
+The original version of this file contained notes about creating Rmd templates only. For now, that will still be the case. However, I renamed it generically as "Creating Templates" with the hopes that I would eventually add notes on creating other kinds of template files as well. 
+
+## Rmd Templates
+
+This section contains notes on creating Rmd templates for RStudio. 
+
+🔴 Left off here...
+
+1. In RStudio, click on the "new file" button.   
+2. Click "R Markdown..."   
+
+```{r}
+#| echo: false
+
+knitr::include_graphics("img/01_programming/packages_rmd_templates/new_rmd.png")
+```
+
+3. Click "From Template" in the left sidebar menu.   
+4. A list of Rmd templates appears in the "Template:" list.   
+
+```{r}
+#| echo: false
+
+knitr::include_graphics("img/01_programming/packages_rmd_templates/list_of_rmd_templates.png")
+```
+
+You can create your own templates and add them to this menu, which can be really handy! Below, I describe how to do that. 
+
+**Important:** Rmd templates can only be added to RStudio's template list by adding the Rmd template to a package and then installing that package on your computer. Read Hadley Wickham and Jenny Bryan's [R Packages book](https://r-pkgs.org/) for an overview of creating R packages. 
+
+
+## 🌎Useful websites
+
+* https://bookdown.org/yihui/rmarkdown/document-templates.html   
+* https://r-pkgs.org/   
+
+
+## Create a package
+
+See [R Packages](https://r-pkgs.org/) and/or [my R packages notes](#my-package-notes). 
+
+
+## Add a template to your package
+
+**Step 1.** Create directory for template
+
+> Templates are located within the `inst/rmarkdown/templates` directory of a package. This structure can be generated automatically with the `use_rmarkdown_template()` function from the `usethis` package. It is possible to contain multiple templates in a single package, with each template stored in a separate sub-directory.
+
+**Step 2.** 
+
+For example, the "No Output" Rmd template can be viewed at: https://github.com/brad-cannell/templates/blob/master/inst/rmarkdown/templates/no_output/skeleton/skeleton.Rmd   
+
+**Step 3.**  Change the name of the folder in `inst/rmarkdown/templates` from `template-name`. For example, `no_output`.
+
+**Step 4.**  Open the folder you just renamed and update `template.yaml`. 
+
+* The value you pass to the `name:` parameter will determine how the template is listed in RStudio's template list. For example, `name: No Output`.
+
+* The value you pass to the `description:` parameter appear as a tool tip when you hover your mouse over the template's name in RStudio's template list. For, example, `Brad Cannell's template for an Rmd file with no output.`
+
+**Step 5.** Create (or copy and paste) your Rmd template file into `skeleton/skeleton.Rmd`.
+
+<p class="note"> 🗒**Side Note:** If you already have a template in your package, you can create another one by pasting `usethis::use_rmarkdown_template()` in the console again and following the steps above. </p>
+
+```{r}
+#| echo: false
+#| label: creating-templates-clean-up
+
+# Clean up the global environment.
+
+rm(list = ls())
+```
+
+
