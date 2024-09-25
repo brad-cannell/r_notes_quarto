@@ -1,0 +1,61 @@
+# Chapter Template {#sec-template-chapter}
+
+Try to make the chapter name and section name match.
+
+Put the .qmd file and any other assets inside the same folder within the `chapters` folder.
+
+Eventually, we might want to turn this into a formal [Quarto template](https://quarto.org/docs/extensions/starter-templates.html).
+
+## Load packages
+
+```{r}
+library(dplyr, warn.conflicts = FALSE)
+```
+
+## Links
+
+- [Test Quarto Book](https://brad-cannell.github.io/test_quarto_book/)
+
+- [Emphasizing Text](https://github.com/brad-cannell/test_quarto_book/wiki/Emphasizing%20Text)
+
+## Inserting images
+
+```{r}
+#| label: authorize-google
+#| echo: false
+#| fig-cap: The first time you run this code, you will have to authorize the package to access your Google Drive.
+#| fig-alt: A screenshot of the R console. The prompt is asking the user if it is ok to to cache OAuth access credentials in the folder ~/Library/Caches/gargle between R sessions.
+
+knitr::include_graphics("authorize_google.png")
+```
+
+## Call out boxes
+
+::: callout-note
+Note that there are five types of callouts, including: `note`, `tip`, `warning`, `caution`, and `important`.
+:::
+
+::: callout-warning
+Callouts provide a simple way to attract attention, for example, to this warning.
+:::
+
+## Render
+
+1. Add the new chapter's file path to `_quarto.yml`.
+
+2. In the terminal, type `quarto render`.
+
+3. Make sure you are on the main branch.
+
+4. After rendering, make sure to save and commit your changes to GitHub.
+
+5. Type `quarto publish gh-pages` in the terminal.
+
+```{r}
+#| echo: false
+#| label: creating-templates-clean-up
+
+# Clean up the global environment.
+
+rm(list = ls())
+```
