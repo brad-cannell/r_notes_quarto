@@ -24,7 +24,7 @@
     "href": "chapters/rstudio/rstudio.html",
     "title": "1  RStudio",
     "section": "",
-    "text": "1.1 Find and Replace Tool\nNotes on using RStudio’s Find and Replace tool. This can be a real time saver!",
+    "text": "1.1 Find and Replace Tool\nA collection of notes about programming in RStudio – including notes about modifying RStudio locally.\nNotes on using RStudio’s Find and Replace tool. This can be a real time saver!",
     "crumbs": [
       "Programming",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>RStudio</span>"
@@ -46,7 +46,7 @@
     "href": "chapters/regex/regex.html",
     "title": "2  Regular Expressions",
     "section": "",
-    "text": "2.1 Useful websites",
+    "text": "2.1 Useful websites\nA collection of notes about regular expressions.",
     "crumbs": [
       "Programming",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Regular Expressions</span>"
@@ -332,7 +332,7 @@
     "href": "chapters/google_sheets/google_sheets.html",
     "title": "6  Google Sheets",
     "section": "",
-    "text": "6.1 Load packages\nlibrary(dplyr, warn.conflicts = FALSE)\nlibrary(googlesheets4, warn.conflicts = FALSE)\nlibrary(googledrive, warn.conflicts = FALSE)",
+    "text": "6.1 Load packages\nThis note is all about importing and exporting data to/from Google Sheets. The primary motivation for me to create this note initially was a personal budget app I was working on. I knew that I wanted to use Shiny as a front end for that app, but I wasn’t sure what to use a back end. Then, I came across an article by Dean Attali about persistent data storage in Shiny apps that discusses using Google Sheets as a back end for Shiny apps.\nSome of the nice things about using Google Sheets in this way are:\nUseful websites:\nlibrary(dplyr, warn.conflicts = FALSE)\nlibrary(googlesheets4, warn.conflicts = FALSE)\nlibrary(googledrive, warn.conflicts = FALSE)",
     "crumbs": [
       "Working with External Files",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Google Sheets</span>"
