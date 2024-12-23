@@ -1,0 +1,169 @@
+---
+title: "Using ChatGPT with R"
+date: "2024-08-19"
+---
+
+# Overview
+
+I'm trying to figure out how to interact with ChatGPT through R and RStudio. 
+
+Why? 
+- Just to see if I can.
+- As a workaround for some of the challenges I sometimes face when using the web interface (see below).
+- To enhance research/development projects, or at least make them more efficient.
+
+Challenges of working with ChatGPT through a web browser
+- Can't organize and easily find previous chats.
+- Can't easily create template prompts.
+- Can't easily track uploaded files.
+
+Useful websites:
+- [Check my API usage](https://platform.openai.com/settings/organization/usage)
+- https://www.listendata.com/2023/05/chatgpt-in-r.html
+- https://youtu.be/tqfOgWr0PAY?si=reNMaBN5uMOnybLR
+- https://github.com/tidyverse/ellmer
+
+# Load packages
+
+```{r}
+library(dplyr, warn.conflicts = FALSE)
+library(httr)
+library(jsonlite)
+```
+
+# Set Up the API Key
+
+## Access the API Dashboard
+
+log in and navigate to the API dashboard: [OpenAI's API platform](https://platform.openai.com/api-keys).
+
+## Generate an API Key
+
+In the API keys section:
+
+- Click the button labeled "Create new secret key" to generate a new API key.
+
+- Copy the key immediately, as it will only be shown once. Store it securely in a safe place.
+
+## Secure Your API Key
+
+Your API key is like a password:
+
+- Never share your API key in public code repositories, forums, or any other unsecured environment.
+
+- If your API key is compromised, you can delete it and generate a new one from the same API dashboard.
+
+Secure the API key with the keyring package: https://github.com/r-lib/keyring
+
+```{r}
+#| eval: false
+
+keyring::key_set("bradGPT")
+```
+
+Then, enter the API key from above in the popup box.
+
+## Use the API Key in Your Code
+
+When you integrate the API key into your code, as shown in the previous example, make sure to keep it secure, preferably by storing it in an environment variable or a secure configuration file.
+
+Then retrieve it in your script:
+
+```{r}
+#| eval: false
+
+keyring::key_get("bradGPT")
+```
+
+## Manage Usage and Billing
+
+Keep an eye on your usage and billing:
+
+- OpenAI provides a dashboard where you can monitor your API usage and set limits to avoid unexpected charges.
+
+# Create a Function to Call the API
+
+
+
+Here's a simple function to interact with ChatGPT:
+
+```{r}
+chatgpt_request <- function(prompt, api_key) {
+  url <- "https://api.openai.com/v1/chat/completions"
+  
+  headers <- c(
+    `Authorization` = paste("Bearer", api_key),
+    `Content-Type` = "application/json"
+  )
+  
+  body <- list(
+    model = "gpt-4o",
+    messages = list(
+      list(role = "system", content = "You are ChatGPT, a helpful assistant."),
+      list(role = "user", content = prompt)
+    )
+  )
+  
+  response <- POST(url, add_headers(.headers = headers), body = toJSON(body, auto_unbox = TRUE))
+  
+  content(response, as = "parsed")$choices[[1]]$message$content
+}
+```
+
+```{r}
+#| eval: false # So, this doesn't run every time I render the book.
+
+# Example usage:
+result <- chatgpt_request("Tell me about healthy aging.", keyring::key_get("bradGPT"))
+cat(result)
+```
+
+# Run the function
+
+You can now call this function with any prompt:
+
+```{r}
+#| eval: false # So, this doesn't run every time I render the book.
+
+result <- chatgpt_request("What is the capital of France?", keyring::key_get("bradGPT"))
+cat(result)
+```
+
+Notes:
+- Model: Adjust the model ("gpt-4" or "gpt-3.5-turbo") depending on what version you're using.
+- Rate Limits and Costs: Be mindful of API rate limits and costs associated with your usage.
+- This setup will allow you to interact with ChatGPT directly from within your R scripts or sessions.
+
+# Trying with Python instead
+
+I was having trouble getting the code above to work (eventually, it did work, though). It looks like the new [ellmer package](https://ellmer.tidyverse.org/) should help, but it wasn't available on CRAN yet at the time of this writing (2024-12-22). The ellmer package down site suggests checking out the Python [chatlas](https://github.com/posit-dev/chatlas) package, which is what I'm doing here. 
+
+I'm starting with these websites: https://github.com/posit-dev/chatlas and https://posit-dev.github.io/chatlas/reference/ChatOpenAI.html
+
+```{python}
+import os
+from chatlas import ChatOpenAI
+```
+
+I used this website for setting the API key as an environment variable: https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety
+
+I also tried to use this SO post to get around a permission issue I was experiencing: https://stackoverflow.com/questions/64291625/zsh-permission-denied-users-macbookpro-zshrc
+
+So far, I haven't been able to store the API as an environment variable. So, the code below didn't work. If I typed the API key directly into code below, it worked, but I can't save code that uses that method.
+
+```{python}
+# chat = ChatOpenAI(
+#   model = "gpt-4o-mini",
+#   api_key=os.getenv("OPENAI_API_KEY")
+# )
+```
+
+```{python}
+#| eval: false # So, this doesn't run every time I render the book.
+
+chat.chat("What is the capital of France?")
+```
+
+
+
+
