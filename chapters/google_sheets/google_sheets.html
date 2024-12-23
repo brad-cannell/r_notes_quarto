@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>6&nbsp; Google Sheets – R Notes</title>
+<title>7&nbsp; Google Sheets – R Notes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
 <link href="../../chapters/officer/officer.html" rel="next">
-<link href="../../chapters/stata/stata.html" rel="prev">
+<link href="../../chapters/chatgpt/chatgpt.html" rel="prev">
 <link href="../../cover.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -116,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/google_sheets/google_sheets.html">Working with External Files</a></li><li class="breadcrumb-item"><a href="../../chapters/google_sheets/google_sheets.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Google Sheets</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/google_sheets/google_sheets.html">Working with External Files</a></li><li class="breadcrumb-item"><a href="../../chapters/google_sheets/google_sheets.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Google Sheets</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -189,6 +189,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Stata</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/chatgpt/chatgpt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Using ChatGPT with R</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -207,7 +213,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/google_sheets/google_sheets.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Google Sheets</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Google Sheets</span></span></a>
   </div>
 </li>
       </ul>
@@ -236,7 +242,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/officer/officer.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Officer</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Officer</span></span></a>
   </div>
 </li>
       </ul>
@@ -255,16 +261,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#load-packages" id="toc-load-packages" class="nav-link active" data-scroll-target="#load-packages"><span class="header-section-number">6.1</span> Load packages</a></li>
-  <li><a href="#sheet-id" id="toc-sheet-id" class="nav-link" data-scroll-target="#sheet-id"><span class="header-section-number">6.2</span> Sheet ID</a></li>
-  <li><a href="#view-google-sheet" id="toc-view-google-sheet" class="nav-link" data-scroll-target="#view-google-sheet"><span class="header-section-number">6.3</span> View Google Sheet</a></li>
-  <li><a href="#import" id="toc-import" class="nav-link" data-scroll-target="#import"><span class="header-section-number">6.4</span> Import</a></li>
-  <li><a href="#metadata" id="toc-metadata" class="nav-link" data-scroll-target="#metadata"><span class="header-section-number">6.5</span> Metadata</a></li>
-  <li><a href="#properties" id="toc-properties" class="nav-link" data-scroll-target="#properties"><span class="header-section-number">6.6</span> Properties</a></li>
-  <li><a href="#add-data-to-sheets" id="toc-add-data-to-sheets" class="nav-link" data-scroll-target="#add-data-to-sheets"><span class="header-section-number">6.7</span> Add data to sheets</a>
+  <li><a href="#load-packages" id="toc-load-packages" class="nav-link active" data-scroll-target="#load-packages"><span class="header-section-number">7.1</span> Load packages</a></li>
+  <li><a href="#sheet-id" id="toc-sheet-id" class="nav-link" data-scroll-target="#sheet-id"><span class="header-section-number">7.2</span> Sheet ID</a></li>
+  <li><a href="#view-google-sheet" id="toc-view-google-sheet" class="nav-link" data-scroll-target="#view-google-sheet"><span class="header-section-number">7.3</span> View Google Sheet</a></li>
+  <li><a href="#import" id="toc-import" class="nav-link" data-scroll-target="#import"><span class="header-section-number">7.4</span> Import</a></li>
+  <li><a href="#metadata" id="toc-metadata" class="nav-link" data-scroll-target="#metadata"><span class="header-section-number">7.5</span> Metadata</a></li>
+  <li><a href="#properties" id="toc-properties" class="nav-link" data-scroll-target="#properties"><span class="header-section-number">7.6</span> Properties</a></li>
+  <li><a href="#add-data-to-sheets" id="toc-add-data-to-sheets" class="nav-link" data-scroll-target="#add-data-to-sheets"><span class="header-section-number">7.7</span> Add data to sheets</a>
   <ul class="collapse">
-  <li><a href="#method-1-add-data-locally-and-then-write-to-google-sheets" id="toc-method-1-add-data-locally-and-then-write-to-google-sheets" class="nav-link" data-scroll-target="#method-1-add-data-locally-and-then-write-to-google-sheets"><span class="header-section-number">6.7.1</span> Method 1: Add data locally and then write to Google Sheets</a></li>
-  <li><a href="#method-2-add-directly-to-google-sheets-almost-like-a-database" id="toc-method-2-add-directly-to-google-sheets-almost-like-a-database" class="nav-link" data-scroll-target="#method-2-add-directly-to-google-sheets-almost-like-a-database"><span class="header-section-number">6.7.2</span> Method 2: Add directly to Google Sheets (almost like a database)</a></li>
+  <li><a href="#method-1-add-data-locally-and-then-write-to-google-sheets" id="toc-method-1-add-data-locally-and-then-write-to-google-sheets" class="nav-link" data-scroll-target="#method-1-add-data-locally-and-then-write-to-google-sheets"><span class="header-section-number">7.7.1</span> Method 1: Add data locally and then write to Google Sheets</a></li>
+  <li><a href="#method-2-add-directly-to-google-sheets-almost-like-a-database" id="toc-method-2-add-directly-to-google-sheets-almost-like-a-database" class="nav-link" data-scroll-target="#method-2-add-directly-to-google-sheets-almost-like-a-database"><span class="header-section-number">7.7.2</span> Method 2: Add directly to Google Sheets (almost like a database)</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/brad-cannell/test_quarto_book/edit/main/chapters/google_sheets/google_sheets.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
@@ -272,9 +278,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/google_sheets/google_sheets.html">Working with External Files</a></li><li class="breadcrumb-item"><a href="../../chapters/google_sheets/google_sheets.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Google Sheets</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/google_sheets/google_sheets.html">Working with External Files</a></li><li class="breadcrumb-item"><a href="../../chapters/google_sheets/google_sheets.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Google Sheets</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-google-sheets" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Google Sheets</span></span></h1>
+<h1 class="title"><span id="sec-google-sheets" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Google Sheets</span></span></h1>
 </div>
 
 
@@ -304,30 +310,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><a href="https://shiny.posit.co/r/articles/build/persistent-data-storage/#gsheets">Persistent data storage in Shiny apps - Google Sheets</a></p></li>
 <li><p><a href="https://attalitech.com/#portfolio">Dean Attali’s Persistent data storage Shiny app</a></p></li>
 </ul>
-<section id="load-packages" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="load-packages"><span class="header-section-number">6.1</span> Load packages</h2>
+<section id="load-packages" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="load-packages"><span class="header-section-number">7.1</span> Load packages</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr, <span class="at">warn.conflicts =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(googlesheets4, <span class="at">warn.conflicts =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(googledrive, <span class="at">warn.conflicts =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="sheet-id" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="sheet-id"><span class="header-section-number">6.2</span> Sheet ID</h2>
+<section id="sheet-id" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="sheet-id"><span class="header-section-number">7.2</span> Sheet ID</h2>
 <p>Save the sheet id for use below. You can pull it from the sheet’s URL. For example, the sheet id for the budget app is: <code>1153fK76wz8cu4URFM7eidlyv8AEUoSKAAIt-q6uH0ZE</code>. It is taken from the budget app’s url, which is: <code>https://docs.google.com/spreadsheets/d/1153fK76wz8cu4URFM7eidlyv8AEUoSKAAIt-q6uH0ZE/edit#gid=1694905897</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>budget_app_id <span class="ot">&lt;-</span> <span class="st">"1153fK76wz8cu4URFM7eidlyv8AEUoSKAAIt-q6uH0ZE"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="view-google-sheet" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="view-google-sheet"><span class="header-section-number">6.3</span> View Google Sheet</h2>
+<section id="view-google-sheet" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="view-google-sheet"><span class="header-section-number">7.3</span> View Google Sheet</h2>
 <p>View the Google Sheet in the browser (optional). The code below isn’t run.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gs4_browse</span>(budget_app_id)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="import" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="import"><span class="header-section-number">6.4</span> Import</h2>
+<section id="import" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="import"><span class="header-section-number">7.4</span> Import</h2>
 <p>Now, we will import a Google Sheet.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>entities <span class="ot">&lt;-</span> <span class="fu">read_sheet</span>(<span class="at">ss =</span> budget_app_id, <span class="at">sheet =</span> <span class="st">"Entities"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -435,8 +441,8 @@ Note
 </div>
 </div>
 </section>
-<section id="metadata" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="metadata"><span class="header-section-number">6.5</span> Metadata</h2>
+<section id="metadata" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="metadata"><span class="header-section-number">7.5</span> Metadata</h2>
 <p>It is also possible to optionally view metadata about the sheet.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gs4_get</span>(budget_app_id)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -497,8 +503,8 @@ Note
 </div>
 </div>
 </section>
-<section id="properties" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="properties"><span class="header-section-number">6.6</span> Properties</h2>
+<section id="properties" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="properties"><span class="header-section-number">7.6</span> Properties</h2>
 <p>It is also possible to optionally view properties of the sheet.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sheet_properties</span>(budget_app_id)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -522,11 +528,11 @@ Note
 </div>
 </div>
 </section>
-<section id="add-data-to-sheets" class="level2" data-number="6.7">
-<h2 data-number="6.7" class="anchored" data-anchor-id="add-data-to-sheets"><span class="header-section-number">6.7</span> Add data to sheets</h2>
+<section id="add-data-to-sheets" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="add-data-to-sheets"><span class="header-section-number">7.7</span> Add data to sheets</h2>
 <p>In the example below, we will add new data to the <strong>entities</strong> sheet.</p>
-<section id="method-1-add-data-locally-and-then-write-to-google-sheets" class="level3" data-number="6.7.1">
-<h3 data-number="6.7.1" class="anchored" data-anchor-id="method-1-add-data-locally-and-then-write-to-google-sheets"><span class="header-section-number">6.7.1</span> Method 1: Add data locally and then write to Google Sheets</h3>
+<section id="method-1-add-data-locally-and-then-write-to-google-sheets" class="level3" data-number="7.7.1">
+<h3 data-number="7.7.1" class="anchored" data-anchor-id="method-1-add-data-locally-and-then-write-to-google-sheets"><span class="header-section-number">7.7.1</span> Method 1: Add data locally and then write to Google Sheets</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>entities_update <span class="ot">&lt;-</span> entities <span class="sc">|&gt;</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">pk_entity =</span> <span class="dv">999</span>, <span class="at">entity_name =</span> <span class="st">"Test"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -552,8 +558,8 @@ Note
 </div>
 </div>
 </section>
-<section id="method-2-add-directly-to-google-sheets-almost-like-a-database" class="level3" data-number="6.7.2">
-<h3 data-number="6.7.2" class="anchored" data-anchor-id="method-2-add-directly-to-google-sheets-almost-like-a-database"><span class="header-section-number">6.7.2</span> Method 2: Add directly to Google Sheets (almost like a database)</h3>
+<section id="method-2-add-directly-to-google-sheets-almost-like-a-database" class="level3" data-number="7.7.2">
+<h3 data-number="7.7.2" class="anchored" data-anchor-id="method-2-add-directly-to-google-sheets-almost-like-a-database"><span class="header-section-number">7.7.2</span> Method 2: Add directly to Google Sheets (almost like a database)</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>entities_empty <span class="ot">&lt;-</span> <span class="fu">slice</span>(entities, <span class="dv">0</span>)</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>entities_update <span class="ot">&lt;-</span> entities_empty <span class="sc">|&gt;</span></span>
@@ -1005,13 +1011,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../chapters/stata/stata.html" class="pagination-link" aria-label="Stata">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Stata</span></span>
+      <a href="../../chapters/chatgpt/chatgpt.html" class="pagination-link" aria-label="Using ChatGPT with R">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Using ChatGPT with R</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../../chapters/officer/officer.html" class="pagination-link" aria-label="Officer">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Officer</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Officer</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

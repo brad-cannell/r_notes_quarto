@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2024-08-19">
 
-<title>5&nbsp; Stata – R Notes</title>
+<title>6&nbsp; Using ChatGPT with R – R Notes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../chapters/chatgpt/chatgpt.html" rel="next">
-<link href="../../chapters/packages_quick_start/packages_quick_start.html" rel="prev">
+<link href="../../chapters/google_sheets/google_sheets.html" rel="next">
+<link href="../../chapters/stata/stata.html" rel="prev">
 <link href="../../cover.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -116,7 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/rstudio/rstudio.html">Programming</a></li><li class="breadcrumb-item"><a href="../../chapters/stata/stata.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Stata</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/rstudio/rstudio.html">Programming</a></li><li class="breadcrumb-item"><a href="../../chapters/chatgpt/chatgpt.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Using ChatGPT with R</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -185,13 +186,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/stata/stata.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../chapters/stata/stata.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Stata</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/chatgpt/chatgpt.html" class="sidebar-item-text sidebar-link">
+  <a href="../../chapters/chatgpt/chatgpt.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Using ChatGPT with R</span></span></a>
   </div>
 </li>
@@ -256,15 +257,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">7</span> Overview</a></li>
+  <li><a href="#load-packages" id="toc-load-packages" class="nav-link" data-scroll-target="#load-packages"><span class="header-section-number">8</span> Load packages</a></li>
+  <li><a href="#set-up-the-api-key" id="toc-set-up-the-api-key" class="nav-link" data-scroll-target="#set-up-the-api-key"><span class="header-section-number">9</span> Set Up the API Key</a>
+  <ul class="collapse">
+  <li><a href="#access-the-api-dashboard" id="toc-access-the-api-dashboard" class="nav-link" data-scroll-target="#access-the-api-dashboard"><span class="header-section-number">9.1</span> Access the API Dashboard</a></li>
+  <li><a href="#generate-an-api-key" id="toc-generate-an-api-key" class="nav-link" data-scroll-target="#generate-an-api-key"><span class="header-section-number">9.2</span> Generate an API Key</a></li>
+  <li><a href="#secure-your-api-key" id="toc-secure-your-api-key" class="nav-link" data-scroll-target="#secure-your-api-key"><span class="header-section-number">9.3</span> Secure Your API Key</a></li>
+  <li><a href="#use-the-api-key-in-your-code" id="toc-use-the-api-key-in-your-code" class="nav-link" data-scroll-target="#use-the-api-key-in-your-code"><span class="header-section-number">9.4</span> Use the API Key in Your Code</a></li>
+  <li><a href="#manage-usage-and-billing" id="toc-manage-usage-and-billing" class="nav-link" data-scroll-target="#manage-usage-and-billing"><span class="header-section-number">9.5</span> Manage Usage and Billing</a></li>
+  </ul></li>
+  <li><a href="#create-a-function-to-call-the-api" id="toc-create-a-function-to-call-the-api" class="nav-link" data-scroll-target="#create-a-function-to-call-the-api"><span class="header-section-number">10</span> Create a Function to Call the API</a></li>
+  <li><a href="#run-the-function" id="toc-run-the-function" class="nav-link" data-scroll-target="#run-the-function"><span class="header-section-number">11</span> Run the function</a></li>
+  <li><a href="#trying-with-python-instead" id="toc-trying-with-python-instead" class="nav-link" data-scroll-target="#trying-with-python-instead"><span class="header-section-number">12</span> Trying with Python instead</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/brad-cannell/test_quarto_book/edit/main/chapters/chatgpt/chatgpt.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/rstudio/rstudio.html">Programming</a></li><li class="breadcrumb-item"><a href="../../chapters/stata/stata.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Stata</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/rstudio/rstudio.html">Programming</a></li><li class="breadcrumb-item"><a href="../../chapters/chatgpt/chatgpt.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Using ChatGPT with R</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-stata" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Stata</span></span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Using ChatGPT with R</span></h1>
 </div>
 
 
@@ -272,6 +291,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 19, 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -281,100 +306,127 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>While working on the L2C main outcomes paper, I wanted to double check some of my results in Stata. It turns out you can run Stata code directly from within R; albeit with some limitations. This note needs some work, but the basics are here.</p>
-<p>The first thing we need to do is load the <code>RStata</code> package.</p>
+<section id="overview" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Overview</h1>
+<p>I’m trying to figure out how to interact with ChatGPT through R and RStudio.</p>
+<p>Why? - Just to see if I can. - As a workaround for some of the challenges I sometimes face when using the web interface (see below). - To enhance research/development projects, or at least make them more efficient.</p>
+<p>Challenges of working with ChatGPT through a web browser - Can’t organize and easily find previous chats. - Can’t easily create template prompts. - Can’t easily track uploaded files.</p>
+<p>Useful websites: - <a href="https://platform.openai.com/settings/organization/usage">Check my API usage</a> - https://www.listendata.com/2023/05/chatgpt-in-r.html - https://youtu.be/tqfOgWr0PAY?si=reNMaBN5uMOnybLR - https://github.com/tidyverse/ellmer</p>
+</section>
+<section id="load-packages" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Load packages</h1>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr, <span class="at">warn.conflicts =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RStata) <span class="co"># For Stata</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(httr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Then, we need to tell R where to find Stata on our local computer and which version of Stata we are using.</p>
+</section>
+<section id="set-up-the-api-key" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Set Up the API Key</h1>
+<section id="access-the-api-dashboard" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="access-the-api-dashboard"><span class="header-section-number">9.1</span> Access the API Dashboard</h2>
+<p>log in and navigate to the API dashboard: <a href="https://platform.openai.com/api-keys">OpenAI’s API platform</a>.</p>
+</section>
+<section id="generate-an-api-key" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="generate-an-api-key"><span class="header-section-number">9.2</span> Generate an API Key</h2>
+<p>In the API keys section:</p>
+<ul>
+<li><p>Click the button labeled “Create new secret key” to generate a new API key.</p></li>
+<li><p>Copy the key immediately, as it will only be shown once. Store it securely in a safe place.</p></li>
+</ul>
+</section>
+<section id="secure-your-api-key" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="secure-your-api-key"><span class="header-section-number">9.3</span> Secure Your API Key</h2>
+<p>Your API key is like a password:</p>
+<ul>
+<li><p>Never share your API key in public code repositories, forums, or any other unsecured environment.</p></li>
+<li><p>If your API key is compromised, you can delete it and generate a new one from the same API dashboard.</p></li>
+</ul>
+<p>Secure the API key with the keyring package: https://github.com/r-lib/keyring</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For Stata</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="st">"RStata.StataPath"</span> <span class="ot">=</span> <span class="st">"/Applications/Stata/StataMP.app/Contents/MacOS/stata-mp"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="st">"RStata.StataVersion"</span> <span class="ot">=</span> <span class="dv">18</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>keyring<span class="sc">::</span><span class="fu">key_set</span>(<span class="st">"bradGPT"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Then, we can run Stata directly in R code chunks in RStudio. For example, let’s calculate the frequency and percentage of observations of each cylinder type in the <code>mtcars</code> data set.</p>
-<ol type="1">
-<li>Pass a Stata command (as a character string) – or a do file – to the <code>src</code> argument of the <code>stata()</code> function.</li>
-<li>Pass the name of a data frame that currently exists in the R global environment to the <code>data.in</code> argument of the <code>stata()</code> function.</li>
-</ol>
+<p>Then, enter the API key from above in the popup box.</p>
+</section>
+<section id="use-the-api-key-in-your-code" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="use-the-api-key-in-your-code"><span class="header-section-number">9.4</span> Use the API Key in Your Code</h2>
+<p>When you integrate the API key into your code, as shown in the previous example, make sure to keep it secure, preferably by storing it in an environment variable or a secure configuration file.</p>
+<p>Then retrieve it in your script:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stata</span>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">src =</span> <span class="st">"tabulate cyl"</span>,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data.in =</span> mtcars</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>. tabulate cyl
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>keyring<span class="sc">::</span><span class="fu">key_get</span>(<span class="st">"bradGPT"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="manage-usage-and-billing" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="manage-usage-and-billing"><span class="header-section-number">9.5</span> Manage Usage and Billing</h2>
+<p>Keep an eye on your usage and billing:</p>
+<ul>
+<li>OpenAI provides a dashboard where you can monitor your API usage and set limits to avoid unexpected charges.</li>
+</ul>
+</section>
+</section>
+<section id="create-a-function-to-call-the-api" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Create a Function to Call the API</h1>
+<p>Here’s a simple function to interact with ChatGPT:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>chatgpt_request <span class="ot">&lt;-</span> <span class="cf">function</span>(prompt, api_key) {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  url <span class="ot">&lt;-</span> <span class="st">"https://api.openai.com/v1/chat/completions"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  headers <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Authorization</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">paste</span>(<span class="st">"Bearer"</span>, api_key),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Content-Type</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"application/json"</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  body <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">model =</span> <span class="st">"gpt-4o"</span>,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">messages =</span> <span class="fu">list</span>(</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(<span class="at">role =</span> <span class="st">"system"</span>, <span class="at">content =</span> <span class="st">"You are ChatGPT, a helpful assistant."</span>),</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(<span class="at">role =</span> <span class="st">"user"</span>, <span class="at">content =</span> prompt)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  response <span class="ot">&lt;-</span> <span class="fu">POST</span>(url, <span class="fu">add_headers</span>(<span class="at">.headers =</span> headers), <span class="at">body =</span> <span class="fu">toJSON</span>(body, <span class="at">auto_unbox =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">content</span>(response, <span class="at">as =</span> <span class="st">"parsed"</span>)<span class="sc">$</span>choices[[<span class="dv">1</span>]]<span class="sc">$</span>message<span class="sc">$</span>content</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage:</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">chatgpt_request</span>(<span class="st">"Tell me about healthy aging."</span>, keyring<span class="sc">::</span><span class="fu">key_get</span>(<span class="st">"bradGPT"</span>))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="run-the-function" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Run the function</h1>
+<p>You can now call this function with any prompt:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">chatgpt_request</span>(<span class="st">"What is the capital of France?"</span>, keyring<span class="sc">::</span><span class="fu">key_get</span>(<span class="st">"bradGPT"</span>))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Notes: - Model: Adjust the model (“gpt-4” or “gpt-3.5-turbo”) depending on what version you’re using. - Rate Limits and Costs: Be mindful of API rate limits and costs associated with your usage. - This setup will allow you to interact with ChatGPT directly from within your R scripts or sessions.</p>
+</section>
+<section id="trying-with-python-instead" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Trying with Python instead</h1>
+<p>I was having trouble getting the code above to work (eventually, it did work, though). It looks like the new <a href="https://ellmer.tidyverse.org/">ellmer package</a> should help, but it wasn’t available on CRAN yet at the time of this writing (2024-12-22). The ellmer package down site suggests checking out the Python <a href="https://github.com/posit-dev/chatlas">chatlas</a> package, which is what I’m doing here.</p>
+<p>I’m starting with these websites: https://github.com/posit-dev/chatlas and https://posit-dev.github.io/chatlas/reference/ChatOpenAI.html</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> chatlas <span class="im">import</span> ChatOpenAI</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>I used this website for setting the API key as an environment variable: https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety</p>
+<p>I also tried to use this SO post to get around a permission issue I was experiencing: https://stackoverflow.com/questions/64291625/zsh-permission-denied-users-macbookpro-zshrc</p>
+<p>So far, I haven’t been able to store the API as an environment variable. So, the code below didn’t work. If I typed the API key directly into code below, it worked, but I can’t save code that uses that method.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># chat = ChatOpenAI(</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   model = "gpt-4o-mini",</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   api_key=os.getenv("OPENAI_API_KEY")</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>chat.chat(<span class="st">"What is the capital of France?"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
-        cyl |      Freq.     Percent        Cum.
-------------+-----------------------------------
-          4 |         11       34.38       34.38
-          6 |          7       21.88       56.25
-          8 |         14       43.75      100.00
-------------+-----------------------------------
-      Total |         32      100.00</code></pre>
-</div>
-</div>
-<p>This works, but we can’t use these estimates directly. However, we can save the estimation results and use them in further operations. See this <a href="https://stackoverflow.com/questions/57881623/how-to-capture-rstata-package-output-for-subsequent-processing-in-r">SO post</a> for more discussion.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a temp file to save the results to.</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># I don't want to create a dta file on my desktop every time I build this book.</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>tmpdir <span class="ot">&lt;-</span> <span class="fu">tempfile</span>()</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(tmpdir, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>tempfile <span class="ot">&lt;-</span> <span class="fu">file.path</span>(tmpdir, <span class="st">"stata_out.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>stata_tabulate_results <span class="ot">&lt;-</span> <span class="fu">stata</span>(</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>( <span class="co"># Using past to inject the temp file. Normally this isn't necessary</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="st">    tabulate cyl, matcell(x)</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st">    clear</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="st">    svmat x</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="st">    '</span>,</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'save '</span>, tempfile</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">data.in =</span> mtcars,</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">data.out =</span> <span class="cn">TRUE</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>. 
-.     tabulate cyl, matcell(x)
 
-        cyl |      Freq.     Percent        Cum.
-------------+-----------------------------------
-          4 |         11       34.38       34.38
-          6 |          7       21.88       56.25
-          8 |         14       43.75      100.00
-------------+-----------------------------------
-      Total |         32      100.00
-.     clear
-.     svmat x
-number of observations will be reset to 3
-Press any key to continue, or Break to abort
-Number of observations (_N) was 0, now 3.
-.     save /var/folders/_6/rzs6b7fd09d1_4sw4vyrw8900000gs/T//Rtmp1JXCEK/file144
-&gt; d11c6609ce/stata_out.dta
-file
-    /var/folders/_6/rzs6b7fd09d1_4sw4vyrw8900000gs/T//Rtmp1JXCEK/file144d11c6
-    &gt; 609ce/stata_out.dta saved</code></pre>
-</div>
-</div>
-<p>Without the tempfile code, it would look like this.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>stata_tabulate_results <span class="ot">&lt;-</span> <span class="fu">stata</span>(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="st">  tabulate cyl, matcell(x)</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="st">  clear</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="st">  svmat x</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="st">  save "/Users/bradcannell/Desktop/t.dta"</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="st">  '</span>,</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data.in =</span> mtcars,</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">data.out =</span> <span class="cn">TRUE</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>I still have a lot to learn about saving the results from Stata commands. In the future, we may want to add notes from “/Users/bradcannell/Library/CloudStorage/Dropbox/Stata/Notes/Example Do Files/Matrix and Saved Results.do”</p>
-
-
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -796,13 +848,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../chapters/packages_quick_start/packages_quick_start.html" class="pagination-link" aria-label="Packages: Quick Start">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Packages: Quick Start</span></span>
+      <a href="../../chapters/stata/stata.html" class="pagination-link" aria-label="Stata">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Stata</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../chapters/chatgpt/chatgpt.html" class="pagination-link" aria-label="Using ChatGPT with R">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Using ChatGPT with R</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../chapters/google_sheets/google_sheets.html" class="pagination-link" aria-label="Google Sheets">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Google Sheets</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -814,7 +866,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/brad-cannell/test_quarto_book/edit/main/chapters/stata/stata.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/brad-cannell/test_quarto_book/edit/main/chapters/chatgpt/chatgpt.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>
